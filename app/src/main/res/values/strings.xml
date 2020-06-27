@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Hotel Management System</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="login">login</string>
+    <string name="register">register</string>
+    <string name="lastname">Last Name:</string>
+    <string name="firstname">First Name:</string>
+    <string name="phone">Phone:</string>
+    <string name="email">Email:</string>
+    <string name="address">Address:</string>
+    <string name="city">City:</string>
+    <string name="state">State:</string>
+    <string name="zip">Zip Code:</string>
+    <string name="creditcard">Credit Card Number:</string>
+    <string name="cc_expiry">Credit Card Expiry (MM/YY):</string>
+</resources>
