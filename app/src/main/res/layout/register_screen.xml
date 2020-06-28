@@ -5,7 +5,6 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
-
     <EditText
         android:id="@+id/register_username"
         android:layout_width="match_parent"
@@ -22,17 +21,17 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/register_lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lastname"
-        android:textSize="20sp" />
-
-    <EditText
         android:id="@+id/register_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/firstname"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/register_lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lastname"
         android:textSize="20sp" />
 
     <EditText
@@ -94,13 +93,21 @@
         android:layout_height="wrap_content"
         android:hint="@string/cc_expiry"
         android:textSize="20sp" />
+    <Spinner
+        android:id="@+id/Roles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/registers_button"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_button"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:onClick="registerCheck"
         android:textColor="#ECECEC"
         android:layout_height="wrap_content"
         android:text="@string/register" />

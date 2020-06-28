@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.login_screen);
     }
 
-    public void registerDetails(View view) {
-        startActivity(new Intent(this, UserRegistrationActivity.class));
-    }
-
     public void loginCheck(View view) {
 
         userName = (EditText) findViewById(R.id.login_username);
@@ -45,5 +41,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Password must be entered", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void registerDetails(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
