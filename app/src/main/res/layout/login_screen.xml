@@ -69,17 +69,24 @@
         <Button
             android:id="@+id/login_button"
             android:layout_width="0dp"
+            android:textColor="#ECECEC"
+            android:background="@drawable/custom_button"
             android:layout_height="wrap_content"
+            android:onClick="loginCheck"
             android:layout_marginRight="25dp"
             android:layout_weight="1"
+
             android:text="@string/login" />
 
         <Button
-            android:id="@+id/app_homescreen_register_button"
+            android:id="@+id/register_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/register" />
+            android:background="@drawable/custom_button"
+            android:text="@string/register"
+            android:onClick="registerDetails"
+            android:textColor="#ECECEC" />
 
     </LinearLayout>
 

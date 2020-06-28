@@ -98,8 +98,10 @@
     <Button
         android:id="@+id/register_button"
         android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:textColor="#ECECEC"
         android:layout_height="wrap_content"
         android:text="@string/register" />
 
