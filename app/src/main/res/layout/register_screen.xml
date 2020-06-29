@@ -77,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/zip"
+        android:inputType="number"
         android:textSize="20sp" />
 
     <EditText
@@ -92,6 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/cc_expiry"
+        android:inputType="number"
         android:textSize="20sp" />
     <Spinner
         android:id="@+id/Roles"

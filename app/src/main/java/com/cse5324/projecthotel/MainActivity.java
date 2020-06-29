@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     EditText userName,passWord;
-
+    DatabaseHelper db;
     String sUsername,sPassword;
 
     @Override
@@ -36,11 +36,26 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "Username must be entered", Toast.LENGTH_SHORT).show();
         }
-        else
+        else if(TextUtils.isEmpty(sPassword))
         {
             Toast.makeText(this, "Password must be entered", Toast.LENGTH_SHORT).show();
         }
+        else
+        {
+            db = new DatabaseHelper(this);
 
+            Boolean res =  db.ValidateUser(sUsername,sPassword);
+
+            if(res == true)
+            {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, DashBoardActivity.class));
+            }
+            else
+            {
+                Toast.makeText(this, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void registerDetails(View view) {
