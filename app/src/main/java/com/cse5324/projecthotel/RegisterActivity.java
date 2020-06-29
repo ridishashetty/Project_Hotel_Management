@@ -3,18 +3,11 @@ package com.cse5324.projecthotel;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.text.BoringLayout;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     Spinner spinner1;
     DatabaseHelper db;
@@ -165,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (sRole.matches(""))
         {
-            Toast.makeText(LoginActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
             Check = false;
         }
 
@@ -176,8 +169,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if(res == true)
             {
-                Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MainActivity.class));
+                Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainAppScreenActivity.class));
             }
         }
     }

@@ -65,6 +65,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public void changePassword(String username, String newPassword) {
+        db = this.getReadableDatabase();
+        db.rawQuery("UPDATE "+DatabaseHelper.TABLE_NAME+" SET "
+                +DatabaseHelper.COL_2
+                +" = '"+newPassword+"' WHERE "+ DatabaseHelper.COL_1+" = ?",new String[]{username});
+    }
+
     public boolean ValidateUser(String username, String password) {
         db = this.getReadableDatabase();
         String queryForCheckingPassword = "Select * from "+TABLE_NAME+" where USERNAME = '" + username + "' and PASSWORD = '"+password+"'";
