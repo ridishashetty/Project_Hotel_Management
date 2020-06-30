@@ -1,118 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/register_username"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/username"
-        android:textSize="20sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/register_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_firstname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/firstname"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/firstname"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_lastname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/lastname"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastname"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/phone"
-        android:inputType="phone"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/address"
-        android:inputType="textPostalAddress"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address"
+            android:inputType="textPostalAddress"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/city"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_state"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/state"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/state"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_zipcode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/zip"
-        android:inputType="number"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_zipcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/zip"
+            android:inputType="number"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_credit_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/creditcard"
-        android:inputType="number"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/register_credit_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/creditcard"
+            android:inputType="number"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/register_cc_expiry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/cc_expiry"
-        android:inputType="number"
-        android:textSize="20sp" />
-    <Spinner
-        android:id="@+id/Roles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        />
+        <EditText
+            android:id="@+id/register_cc_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cc_expiry"
+            android:inputType="number"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/Roles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            />
 
-    <Button
-        android:id="@+id/registers_button"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_button"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:onClick="registerCheck"
-        android:textColor="#ECECEC"
-        android:layout_height="wrap_content"
-        android:text="@string/register" />
-
-
-</LinearLayout>
+        <Button
+            android:id="@+id/registers_button"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:onClick="registerCheck"
+            android:textColor="#ECECEC"
+            android:layout_height="wrap_content"
+            android:text="@string/register" />
+    </LinearLayout>
+</ScrollView>
