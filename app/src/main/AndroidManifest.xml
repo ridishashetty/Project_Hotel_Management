@@ -11,15 +11,43 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".DashBoardActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ManagerScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ManagerProfile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewReservations"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SearchRoom"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AvailableRoom"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".AdminScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".GuestScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
     </application>

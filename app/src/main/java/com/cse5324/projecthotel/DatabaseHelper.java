@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME TEXT,PASSWORD INTEGER,FIRSTNAME TEXT,LASTNAME TEXT,PHONE INTEGER,EMAIL INTEGER,ADDRESS INTEGER, CITY TEXT,STATE TEXT,ZIPCODE INTEGER,CREDITCARDNO INTEGER,CREDITCARDEXPIRY INTEGER,ROLE TEXT)");
+        db.execSQL("Create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME TEXT,PASSWORD INTEGER,FIRSTNAME TEXT,LASTNAME TEXT,PHONE INTEGER,EMAIL INTEGER,ADDRESS INTEGER, CITY TEXT,STATE TEXT,ZIPCODE INTEGER,CREDITCARDNO INTEGER,CREDITCARDEXPIRY DATE,ROLE TEXT)");
     }
 
     public boolean insertData(String username,String password,String firstname,String lastname,String phone,String email,String address,String city,
@@ -65,11 +65,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public boolean ValidateUser(String username, String password) {
+    public String ValidateUser(String username, String password) {
         db = this.getReadableDatabase();
         String queryForCheckingPassword = "Select * from "+TABLE_NAME+" where USERNAME = '" + username + "' and PASSWORD = '"+password+"'";
         Cursor cursor = db.rawQuery(queryForCheckingPassword, null);
-        return cursor.getCount() > 0;
+        ////////////////
+        String result="";
+        if (cursor.moveToFirst()) {         //cursor.moveToFirst()
+            result = cursor.getString(cursor.getColumnIndex(TABLE_NAME.concat(".ROLE")));
+        }
+        else
+        {
+            result = "error";
+        }
+        ////////////////
+        return result;      //return cursor.getCount() > 0;
     }
 
     @Override

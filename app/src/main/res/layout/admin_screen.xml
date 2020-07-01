@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/spinnerA"
+            android:layout_width="0.2in"
+            android:layout_height="0.25in"
+            android:layout_marginLeft="5dp"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/hamburger"
+            />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingHorizontal="0.2in"
+            android:background="#2C1EC6"
+            android:text="Logout"
+            android:textColor="@color/white" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2in"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/hotel">
+        </ImageView>
+        <!--Darken Image-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:alpha="0.3"
+            android:layout_marginTop="5dp">
+        </TextView>
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/admin_page_title"
+                android:textSize="45dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:alpha="1"/>
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:textStyle="bold"
+                android:alpha="1"
+                android:textColor="@color/white"
+                android:text="What's going on today?"
+                />
+        </GridLayout>
+    </FrameLayout>
+</LinearLayout>

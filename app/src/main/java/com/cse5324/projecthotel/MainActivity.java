@@ -42,8 +42,36 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
+            //////////////////////Current page is Login Page
             db = new DatabaseHelper(this);
 
+            String res =  db.ValidateUser(sUsername,sPassword);
+
+            if(res.equals("a"))
+            {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, AdminScreen.class));
+            }
+            else if(res.equals("m"))
+            {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ManagerScreen.class));
+            }
+            else if(res.equals("g"))
+            {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, GuestScreen.class));
+            }
+            else if(res.equals("none"))
+            {
+                Toast.makeText(this, "What's your role?", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, DashBoardActivity.class));
+            }
+            else
+            {
+                Toast.makeText(this, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
+            }
+            /*
             Boolean res =  db.ValidateUser(sUsername,sPassword);
 
             if(res == true)
@@ -55,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Toast.makeText(this, "Invalid Login Credentials", Toast.LENGTH_SHORT).show();
             }
+             */
         }
     }
 
