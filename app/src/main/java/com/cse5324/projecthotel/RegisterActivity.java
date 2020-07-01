@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         creditExpiry = (EditText) findViewById(R.id.register_cc_expiry);
         spinner1 = (Spinner) findViewById(R.id.Roles);
 
+        Check = true;   //Important to add here, so registration works if user edits back to correct format
         suserName = userName.getText().toString().trim();
 
         if (suserName.matches(""))
