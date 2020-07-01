@@ -37,7 +37,7 @@ public class ManagerScreen extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 //Goes to Login page
-                startActivity(new Intent(ManagerScreen.this, MainActivity.class));
+                startActivity(new Intent(ManagerScreen.this, MainAppScreenActivity.class));
             }
         });
     }

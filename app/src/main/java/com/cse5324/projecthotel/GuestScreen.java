@@ -38,7 +38,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Login page
-                startActivity(new Intent(GuestScreen.this, MainActivity.class));
+                startActivity(new Intent(GuestScreen.this, MainAppScreenActivity.class));
             }
         });
 

@@ -37,7 +37,7 @@ public class AdminScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Login page
-                startActivity(new Intent(AdminScreen.this, MainActivity.class));
+                startActivity(new Intent(AdminScreen.this, MainAppScreenActivity.class));
             }
         });
     }
