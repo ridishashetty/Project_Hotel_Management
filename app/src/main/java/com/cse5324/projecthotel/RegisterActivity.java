@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     Spinner spinner1;
     DatabaseHelper db;
@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!Pattern.matches(p, sCreditExpiry))
         {
-            creditExpiry.setError("lol");
+            creditExpiry.setError("Use the Valid date format given");
             Check = false;
         }
 
@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (sRole.matches(""))
         {
-            Toast.makeText(LoginActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
             Check = false;
         }
 
@@ -205,8 +205,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if(res == true)
             {
-                Toast.makeText(LoginActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MainActivity.class));
+                Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainAppScreenActivity.class));
             }
         }
     }

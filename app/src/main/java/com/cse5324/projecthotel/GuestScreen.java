@@ -1,15 +1,10 @@
 package com.cse5324.projecthotel;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +41,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Goes to Login page
+                //Goes to Profile page
                 Toast.makeText(GuestScreen.this, "My Profile", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(GuestScreen.this, ___.class));
             }
@@ -56,7 +51,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Goes to Login page
+                //Goes to Request Reservation page
                 Toast.makeText(GuestScreen.this, "Request Hotel Reservations", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(GuestScreen.this, ___.class));
             }
@@ -66,7 +61,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Goes to Login page
+                //Goes to Summary page
                 Toast.makeText(GuestScreen.this, "View Reservations Summary", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(GuestScreen.this, ___.class));
             }
@@ -76,7 +71,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Goes to Login page
+                //Goes to Pending Reservations page
                 Toast.makeText(GuestScreen.this, "View Pending Reservations", Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(GuestScreen.this, ___.class));
             }
