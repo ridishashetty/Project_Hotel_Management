@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainAppScreenActivity extends AppCompatActivity {
 
     EditText userName,passWord;
     DatabaseHelper db;
@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void registerDetails(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }
