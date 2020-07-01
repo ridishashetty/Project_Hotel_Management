@@ -84,10 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
             userName.setError("Username field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;   //Very Important! Once the user enters wrong value check is false, even if user changes to correct value check remains false. Thus, user has to start all over again, without this
-        }
 
         spassWord = passWord.getText().toString().trim();
 
@@ -95,10 +91,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             passWord.setError("Password field cannot be empty");
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
@@ -109,10 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
             firstName.setError("FirstName field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;
-        }
 
 
         slastName = lastName.getText().toString().trim();
@@ -121,10 +109,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             lastName.setError("LastName field cannot be empty");
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
@@ -135,10 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
             phone.setError("PhoneNumber field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;
-        }
 
 
         semail = email.getText().toString().trim();
@@ -147,10 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             email.setError("Email field cannot be empty");
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
@@ -161,10 +137,6 @@ public class RegisterActivity extends AppCompatActivity {
             address.setError("Address field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;
-        }
 
 
         scity = city.getText().toString().trim();
@@ -173,10 +145,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             city.setError("City field cannot be empty");
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
@@ -187,10 +155,6 @@ public class RegisterActivity extends AppCompatActivity {
             state.setError("State field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;
-        }
 
 
         sZipCode = zipcode.getText().toString().trim();
@@ -200,22 +164,14 @@ public class RegisterActivity extends AppCompatActivity {
             zipcode.setError("Zipcode field cannot be empty");
             Check = false;
         }
-        else
-        {
-            Check = true;
-        }
 
 
         screditCardno = creditCardno.getText().toString().trim();
 
         if (screditCardno.matches(""))
         {
-            creditCardno.setError("CreditCardNo field cannot be empty");
+            creditCardno.setError("Credit Card Number cannot be empty");
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
@@ -227,10 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
             creditExpiry.setError("Use the Valid date format given");
             Check = false;
         }
-        else    //Was not able to change to correct date format and register for date without this
-        {
-            Check = true;
-        }
 
         sRole = (String) spinner1.getSelectedItem();
 
@@ -238,10 +190,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             Toast.makeText(RegisterActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
             Check = false;
-        }
-        else
-        {
-            Check = true;
         }
 
 
