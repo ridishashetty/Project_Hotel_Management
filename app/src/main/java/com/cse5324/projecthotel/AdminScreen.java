@@ -39,9 +39,9 @@ public class AdminScreen extends AppCompatActivity{     //implements AdapterView
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Goes to Login page
-                //startActivity(new Intent(AdminScreen.this, ___.class));
-                Toast.makeText(AdminScreen.this, "View Profile", Toast.LENGTH_SHORT).show();
+                //Goes to Profile page
+                startActivity(new Intent(AdminScreen.this, AdminProfile.class));
+                //Toast.makeText(AdminScreen.this, "View Profile", Toast.LENGTH_SHORT).show();
             }
         });
         final Button b2= findViewById(R.id.searchU);
@@ -49,8 +49,8 @@ public class AdminScreen extends AppCompatActivity{     //implements AdapterView
             @Override
             public void onClick(View v) {
                 //Goes to Login page
-                //startActivity(new Intent(AdminScreen.this, ___.class));
-                Toast.makeText(AdminScreen.this, "Search for a User", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminScreen.this, SearchUser.class));
+                //Toast.makeText(AdminScreen.this, "Search for a User", Toast.LENGTH_SHORT).show();
             }
         });
     }

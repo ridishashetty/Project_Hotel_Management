@@ -42,8 +42,8 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Profile page
-                Toast.makeText(GuestScreen.this, "My Profile", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(GuestScreen.this, ___.class));
+                //Toast.makeText(GuestScreen.this, "My Profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GuestScreen.this, GuestProfile.class));
             }
         });
 
@@ -52,8 +52,8 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Request Reservation page
-                Toast.makeText(GuestScreen.this, "Request Hotel Reservations", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(GuestScreen.this, ___.class));
+                //Toast.makeText(GuestScreen.this, "Request Hotel Reservations", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GuestScreen.this, RequestReservations.class));
             }
         });
 
@@ -62,8 +62,8 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Summary page
-                Toast.makeText(GuestScreen.this, "View Reservations Summary", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(GuestScreen.this, ___.class));
+                //Toast.makeText(GuestScreen.this, "View Reservations Summary", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GuestScreen.this, ReservationSummary.class));
             }
         });
 
@@ -72,8 +72,8 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 //Goes to Pending Reservations page
-                Toast.makeText(GuestScreen.this, "View Pending Reservations", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(GuestScreen.this, ___.class));
+                //Toast.makeText(GuestScreen.this, "View Pending Reservations", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(GuestScreen.this, PendingReservations.class));
             }
         });
     }

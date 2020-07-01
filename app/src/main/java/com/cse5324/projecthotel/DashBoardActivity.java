@@ -20,7 +20,7 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.dashboard_screen);
 
         getSupportActionBar().setTitle("DashBoard"); // for set actionbar title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //back button
     }
 
     @Override

@@ -36,7 +36,7 @@
     <string name="admin_page_title">Hello, Admin!</string>
     <string name="search_for_user">search for user</string>
     <string name="manager_page_title">Hello, Manager!</string>
-    <string name="manager_hotel_detail">Hotel Winter Moon, _Location_</string>
+    <string name="manager_hotel_detail">Hotel Winter Moon, San Antonio </string>
 
     <string-array name="manager_functions">
         <!--<item>Menu</item>-->

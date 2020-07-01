@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+<!--MANAGER-->
         <activity android:name=".ManagerScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,16 +40,38 @@
             android:name=".AvailableRoom"
             android:theme="@style/AppTheme" />
 
+        <!--ADMIN-->
         <activity android:name=".AdminScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SearchUser"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AdminProfile"
+            android:theme="@style/AppTheme" />
+
+        <!--GUEST-->
         <activity android:name=".GuestScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".GuestProfile"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".RequestReservations"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ReservationSummary"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".PendingReservations"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
