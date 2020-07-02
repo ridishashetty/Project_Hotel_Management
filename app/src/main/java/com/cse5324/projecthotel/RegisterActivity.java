@@ -161,7 +161,11 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
             Check = false;
         }
-
+        if(sRole == "None")
+        {
+            Toast.makeText(RegisterActivity.this, "Role cannot be None", Toast.LENGTH_SHORT).show();
+            Check = false;
+        }
 
         if(Check == true)
         {
