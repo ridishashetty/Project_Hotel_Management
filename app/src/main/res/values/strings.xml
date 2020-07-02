@@ -27,5 +27,37 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
-    <string name="title_activity_reset_password">ResetPasswordActivity</string>
+
+    <string name="view_profile">View Profile</string>
+    <string name="request_hotel_reservation">request hotel reservation</string>
+    <string name="view_reservation_summary">view reservation summary</string>
+    <string name="view_pending_reservation">view pending reservation</string>
+    <string name="guest_page_title">Hello, Guest!</string>
+    <string name="admin_page_title">Hello, Admin!</string>
+    <string name="search_for_user">search for user</string>
+    <string name="manager_page_title">Hello, Manager!</string>
+    <string name="manager_hotel_detail">Hotel Winter Moon, San Antonio </string>
+
+    <string-array name="manager_functions">
+        <!--<item>Menu</item>-->
+        <item></item>
+        <item>My Profile</item>
+        <item>View Reservations</item>
+        <item>Search for a Room</item>
+        <item>Available Rooms</item>
+    </string-array>
+    <string-array name="admin_functions">
+        <!--<item>Menu</item>-->
+        <item></item>
+        <item>My Profile</item>
+        <item>Search for a User</item>
+    </string-array>
+    <string-array name="guest_functions">
+        <!--<item>Menu</item>-->
+        <item></item>
+        <item>My Profile</item>
+        <item>Request Hotel Reservation</item>
+        <item>View Reservations Summary</item>
+        <item>View Pending Reservations</item>
+    </string-array>
 </resources>

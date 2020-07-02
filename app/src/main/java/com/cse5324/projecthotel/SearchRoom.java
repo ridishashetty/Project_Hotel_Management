@@ -1,28 +1,22 @@
 package com.cse5324.projecthotel;
 
 import android.os.Bundle;
-/*
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-*/
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.MenuItem;
-import android.view.View;
-
-public class DashBoardActivity extends AppCompatActivity {
+public class SearchRoom extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard_screen);
+        setContentView(R.layout.search_room);
 
-        getSupportActionBar().setTitle("DashBoard"); // for set actionbar title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //back button
+        getSupportActionBar().setTitle("Search for a room");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //go back button
     }
 
+    //go back button to work
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub

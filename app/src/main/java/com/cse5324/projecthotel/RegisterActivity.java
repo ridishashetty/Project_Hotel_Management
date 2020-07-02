@@ -1,19 +1,37 @@
 package com.cse5324.projecthotel;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
+/*
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+*/
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.text.BoringLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewParent;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_screen);
         db = new DatabaseHelper(this);
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("None");
+        //spinnerArray.add("None");
         spinnerArray.add("Guest");
         spinnerArray.add("Manager");
         spinnerArray.add("Admin");
@@ -42,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Registration"); // for set actionbar title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     public void registerCheck(View view)
     {
         userName = (EditText) findViewById(R.id.register_username);
@@ -58,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         creditExpiry = (EditText) findViewById(R.id.register_cc_expiry);
         spinner1 = (Spinner) findViewById(R.id.Roles);
 
-
+        Check = true;   //Important to add here, so registration works if user edits back to correct format
         suserName = userName.getText().toString().trim();
 
         if (suserName.matches(""))
@@ -66,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             userName.setError("Username field cannot be empty");
             Check = false;
         }
+
         spassWord = passWord.getText().toString().trim();
 
         if (spassWord.matches(""))
@@ -73,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             passWord.setError("Password field cannot be empty");
             Check = false;
         }
+
 
         sfirstName = firstName.getText().toString().trim();
 
@@ -82,6 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
+
         slastName = lastName.getText().toString().trim();
 
         if (slastName.matches(""))
@@ -89,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
             lastName.setError("LastName field cannot be empty");
             Check = false;
         }
+
 
         sphone = phone.getText().toString().trim();
 
@@ -98,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
+
         semail = email.getText().toString().trim();
 
         if (semail.matches(""))
@@ -105,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
             email.setError("Email field cannot be empty");
             Check = false;
         }
+
 
         saddress = address.getText().toString().trim();
 
@@ -114,6 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
+
         scity = city.getText().toString().trim();
 
         if (scity.matches(""))
@@ -121,6 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
             city.setError("City field cannot be empty");
             Check = false;
         }
+
 
         sState = state.getText().toString().trim();
 
@@ -130,6 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
+
         sZipCode = zipcode.getText().toString().trim();
 
         if (sZipCode.matches(""))
@@ -138,19 +166,22 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
+
         screditCardno = creditCardno.getText().toString().trim();
 
         if (screditCardno.matches(""))
         {
-            creditCardno.setError("CreditCardNo field cannot be empty");
+            creditCardno.setError("Credit Card Number cannot be empty");
             Check = false;
         }
 
-        sCreditExpiry = creditExpiry.getText().toString().trim();
 
-        if (sCreditExpiry.matches(""))
+        sCreditExpiry = creditExpiry.getText().toString();
+        String p = "^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
+
+        if (!Pattern.matches(p, sCreditExpiry))
         {
-            creditExpiry.setError("CreditExpiry field cannot be empty");
+            creditExpiry.setError("Use the Valid date format given");
             Check = false;
         }
 
@@ -169,6 +200,24 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(Check == true)
         {
+            /////////////////////Registration Page
+            if(sRole=="Guest")
+            {
+                sRole="g";
+            }
+            else if(sRole=="Admin")
+            {
+                sRole="a";
+            }
+            else if(sRole=="Manager")
+            {
+                sRole="m";
+            }
+            else
+            {
+                sRole="none";
+            }
+            /////////////////////
             boolean res = db.insertData(suserName,spassWord,sfirstName,slastName,sphone,semail,saddress,scity,sState,sZipCode,screditCardno,sCreditExpiry,sRole);
 
             if(res == true)
@@ -176,10 +225,12 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, MainAppScreenActivity.class));
             }
+            else
+            {
+                Toast.makeText(RegisterActivity.this, "Error Occurred in Insertion", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
