@@ -75,7 +75,7 @@
             android:id="@+id/searchU"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Search for a User"
+            android:text="Search for User"
             android:layout_weight="1"
             android:background="#2C1EC6"
             android:textColor="@color/white"

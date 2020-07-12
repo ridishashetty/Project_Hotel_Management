@@ -1,7 +1,9 @@
 package com.cse5324.projecthotel;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,15 +19,6 @@ public class AdminScreen extends AppCompatActivity{     //implements AdapterView
 
         getSupportActionBar().setTitle("Admin Home"); // for set actionbar title
 
-/*
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerA);
-        //To get values from the array created in strings.xml and send to the spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.admin_functions, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-*/
         //Logout
         final Button button= findViewById(R.id.logout);
         button.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +28,8 @@ public class AdminScreen extends AppCompatActivity{     //implements AdapterView
                 startActivity(new Intent(AdminScreen.this, MainAppScreenActivity.class));
             }
         });
+
+        //Functions
         final Button b1= findViewById(R.id.profileA);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
