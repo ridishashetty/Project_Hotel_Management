@@ -67,7 +67,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        final Button b4=findViewById(R.id.pending);
+      /*  final Button b4=findViewById(R.id.pending);
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
                 //Toast.makeText(GuestScreen.this, "View Pending Reservations", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(GuestScreen.this, PendingReservations.class));
             }
-        });
+        }); */
     }
 
     @Override
