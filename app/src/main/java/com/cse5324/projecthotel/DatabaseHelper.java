@@ -144,6 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean insertData(String username,String password,String firstname,String lastname,String phone,String email,String address,String city,
                               String state,String zipcode,String creditcardno,String creditcardexpiry, String role) {
         //// new values registration guest
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_1,username);
         cv.put(COL_2,password);

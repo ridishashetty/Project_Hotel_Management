@@ -109,13 +109,6 @@
             android:hint="YYYY-MM-DD"
             android:inputType="date" />
 
-        <Spinner
-            android:id="@+id/Roles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
-
         <Button
             android:id="@+id/registers_button"
             android:layout_width="0.8in"

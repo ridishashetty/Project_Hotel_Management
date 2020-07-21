@@ -35,7 +35,6 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    Spinner spinner1;
     DatabaseHelper db;
     EditText userName,passWord,firstName,lastName,phone,email,address,city,state,zipcode,creditCardno,creditExpiry;
     String suserName,spassWord,sfirstName,slastName,sphone,semail,saddress,scity,sState,sZipCode,screditCardno,sCreditExpiry,sRole;
@@ -45,18 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_screen);
         db = new DatabaseHelper(this);
-        List<String> spinnerArray =  new ArrayList<String>();
-        //spinnerArray.add("None");
-        spinnerArray.add("Guest");
-        spinnerArray.add("Manager");
-        spinnerArray.add("Admin");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, spinnerArray);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1 = (Spinner) findViewById(R.id.Roles);
-        spinner1.setAdapter(adapter);
         getSupportActionBar().setTitle("Registration"); // for set actionbar title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -75,7 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
         zipcode = (EditText) findViewById(R.id.register_zipcode);
         creditCardno = (EditText) findViewById(R.id.register_credit_card);
         creditExpiry = (EditText) findViewById(R.id.register_cc_expiry);
-        spinner1 = (Spinner) findViewById(R.id.Roles);
 
         Check = true;   //Important to add here, so registration works if user edits back to correct format
         suserName = userName.getText().toString().trim();
@@ -185,36 +172,8 @@ public class RegisterActivity extends AppCompatActivity {
             Check = false;
         }
 
-        sRole = (String) spinner1.getSelectedItem();
-
-        if (sRole.matches(""))
-        {
-            Toast.makeText(RegisterActivity.this, "Please select a Role", Toast.LENGTH_SHORT).show();
-            Check = false;
-        }
-
-
-        if(Check == true)
-        {
-            /////////////////////Registration Page
-            if(sRole=="Guest")
-            {
-                sRole="g";
-            }
-            else if(sRole=="Admin")
-            {
-                sRole="a";
-            }
-            else if(sRole=="Manager")
-            {
-                sRole="m";
-            }
-            else
-            {
-                sRole="none";
-            }
             /////////////////////
-            boolean res = db.insertData(suserName,spassWord,sfirstName,slastName,sphone,semail,saddress,scity,sState,sZipCode,screditCardno,sCreditExpiry,sRole);
+            boolean res = db.insertData(suserName,spassWord,sfirstName,slastName,sphone,semail,saddress,scity,sState,sZipCode,screditCardno,sCreditExpiry,"g");
 
             if(res == true)
             {
@@ -225,7 +184,7 @@ public class RegisterActivity extends AppCompatActivity {
             {
                 Toast.makeText(RegisterActivity.this, "Error Occurred in Insertion", Toast.LENGTH_SHORT).show();
             }
-        }
+
     }
 
     @Override
