@@ -42,7 +42,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
         }
         else
         {
-            //////////////////////Current page is Login Page
+            //Current page is Login Page
             db = new DatabaseHelper(this);
 
             String res =  db.ValidateUser(sUsername,sPassword);
