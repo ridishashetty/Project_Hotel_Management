@@ -1,8 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/page"
+    android:scrollHorizontally="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingHorizontal="0.2in"
+            android:background="#2C1EC6"
+            android:text="Logout"
+            android:textColor="@color/white" />
 
+        <Button
+            android:id="@+id/filterMenu"
+            android:layout_margin="8dp"
+            android:layout_width="0.25in"
+            android:layout_height="0.25in"
+            android:background="@drawable/hamburger"/>
+    </GridLayout>
+    <!--
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
+    <!--
+        <GridLayout
+            android:id="@+id/loadAll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableLayout
+                android:id="@+id/reservations"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="#000000">
+                <TableRow
+                    android:background="#ffffff"
+                    android:layout_margin="2dp">
+                    <ImageView
+                        android:id="@+id/roomPicture"
+                        android:background="@drawable/r1"
+                        android:layout_width="170dp"
+                        android:layout_height="150dp"/>
+                    <TableLayout
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TableRow>
+                            <TextView
+                                android:textSize="5dp"
+                                android:textStyle="bold"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/th"
+                                android:textSize="20dp"
+                                android:text="Hotel:"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/td"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="20dp"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/th1"
+                                android:textSize="20dp"
+                                android:text="Type:"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                android:id="@+id/td1"
+                                android:textSize="20dp"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/th2"
+                                android:textSize="20dp"
+                                android:text="Bed:"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/td2"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="20dp"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/th3"
+                                android:textSize="20dp"
+                                android:text="Start Date:"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/td3"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="20dp"/>
+                        </TableRow>
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/th4"
+                                android:textSize="20dp"
+                                android:text="Start Time:"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/td4"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="20dp"/>
+                        </TableRow>
+                    </TableLayout>
+                </TableRow>
+            </TableLayout>
+
+        </GridLayout> -->
 
 </LinearLayout>

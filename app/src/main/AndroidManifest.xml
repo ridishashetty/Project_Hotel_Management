@@ -72,6 +72,12 @@
             android:name=".PendingReservations"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".RequestReservationFilter"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ReservationSummaryFilter"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
