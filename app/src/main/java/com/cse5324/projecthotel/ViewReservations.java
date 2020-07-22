@@ -19,7 +19,7 @@ import java.util.Locale;
 public class ViewReservations extends AppCompatActivity {
 
     Spinner spinner1;
-    String date="",time="",hotel="";
+    String date="",time="",hotel="",activity="";
 
     EditText reservation_Date,reservation_Time,reservation_hotel;
     @Override
@@ -29,6 +29,10 @@ public class ViewReservations extends AppCompatActivity {
 
         getSupportActionBar().setTitle("View Reservations");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //go back button
+
+        Intent intent = getIntent();
+        activity = intent.getStringExtra("activity");
+
 
         List<String> spinnerArray =  new ArrayList<String>();
         spinnerArray.add("Maverick");
@@ -59,6 +63,7 @@ public class ViewReservations extends AppCompatActivity {
         myIntent.putExtra("time",time);
         myIntent.putExtra("date",date);
         myIntent.putExtra("hotel",hotel);
+        myIntent.putExtra("activity",activity);
         startActivity(myIntent);
     }
     //go back button to work

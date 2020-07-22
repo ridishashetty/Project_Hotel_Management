@@ -91,10 +91,10 @@
               android:layout_height="1in"
               android:weightSum="2">
               <Button
-                  android:id="@+id/summary"
+                  android:id="@+id/confirmReserve"
                   android:layout_height="match_parent"
                   android:layout_width="match_parent"
-                  android:text="View Reservation Summary"
+                  android:text="Confirm Reservation"
                   android:layout_weight="1"
                   android:background="#2C1EC6"
                   android:textColor="@color/white"

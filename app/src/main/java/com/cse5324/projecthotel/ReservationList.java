@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ReservationList extends AppCompatActivity {
-    String date="",time="",hotel="";
+    String date="",time="",hotel="",activity="";
     private ArrayList<HashMap<String, String>> list;
     TextView startdate,hotelname,numberofrooms,checkindate,roomtype;
     ArrayList<Person> listreserve;
@@ -53,6 +53,7 @@ public class ReservationList extends AppCompatActivity {
         time = getIntent().getExtras().getString("time");
         date = getIntent().getExtras().getString("date");
         hotel = getIntent().getExtras().getString("hotel");
+        activity = getIntent().getExtras().getString("activity");
 
         listContent = (ListView)findViewById(R.id.thelist);
 
@@ -66,7 +67,7 @@ public class ReservationList extends AppCompatActivity {
         temp.put("StartDate","7-24-2020");
         temp.put("StartTime","12:00:00");
         temp.put("HotelName","Maverick");
-        temp.put("NumberofRooms","100");
+        temp.put("NumberofRooms","4");
         temp.put("CheckinDate","7-24-2020");
         temp.put("CheckoutDate","7-26-2020");
         temp.put("RoomType","Suite");
@@ -77,7 +78,7 @@ public class ReservationList extends AppCompatActivity {
         temp2.put("StartDate","7-24-2020");
         temp2.put("StartTime","12:00:00");
         temp2.put("HotelName","Ranger");
-        temp2.put("NumberofRooms","100");
+        temp2.put("NumberofRooms","8");
         temp2.put("CheckinDate","7-24-2020");
         temp2.put("CheckoutDate","7-26-2020");
         temp2.put("RoomType","Deluxe");
@@ -88,7 +89,7 @@ public class ReservationList extends AppCompatActivity {
         temp3.put("StartDate","7-24-2020");
         temp3.put("StartTime","12:00:00");
         temp3.put("HotelName","Liberty");
-        temp3.put("NumberofRooms","100");
+        temp3.put("NumberofRooms","88");
         temp3.put("CheckinDate","7-24-2020");
         temp3.put("CheckoutDate","7-26-2020");
         temp3.put("RoomType","Standard");
@@ -106,9 +107,19 @@ public class ReservationList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String text = parent.getItemAtPosition(position).toString();
-                Intent myIntent = new Intent(ReservationList.this, SpecificReservation.class);
-                myIntent.putExtra("listselected",text);
-                startActivity(myIntent);
+
+                if(activity.equals("GuestScreen"))
+                {
+                    Intent myIntent = new Intent(ReservationList.this, CreditCardInformation.class);
+                    myIntent.putExtra("listselected",text);
+                    startActivity(myIntent);
+                }
+                else
+                {
+                    Intent myIntent = new Intent(ReservationList.this, SpecificReservation.class);
+                    myIntent.putExtra("listselected",text);
+                    startActivity(myIntent);
+                }
             }
         });
     }
