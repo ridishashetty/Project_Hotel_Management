@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Person;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -94,10 +96,21 @@ public class ReservationList extends AppCompatActivity {
         list.add(temp3);
 
         ListViewAdapter adapter=new ListViewAdapter(this, list);
+        View header = (View)getLayoutInflater().inflate(R.layout.row_layout_list,null);
+        listContent.addHeaderView(header);
         listContent.setAdapter(adapter);
-
         //arrayAdapter = new ArrayAdapter<HashMap<String,String>>(this, R.layout.display_reservation_layouts,R.id.StartDate ,list);
         //listContent.setAdapter(arrayAdapter);
+        listContent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                String text = parent.getItemAtPosition(position).toString();
+                Intent myIntent = new Intent(ReservationList.this, SpecificReservation.class);
+                myIntent.putExtra("listselected",text);
+                startActivity(myIntent);
+            }
+        });
     }
 
     @Override
@@ -108,9 +121,5 @@ public class ReservationList extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void populateList(){
-
     }
 }

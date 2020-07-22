@@ -18,13 +18,10 @@ public class ListViewAdapter extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
     Activity activity;
     public static final String FIRST_COLUMN="StartDate";
-    public static final String SECOND_COLUMN="StartTime";
-    public static final String THIRD_COLUMN="HotelName";
-    public static final String FOURTH_COLUMN="NumberofRooms";
-    public static final String FIFTH_COLUMN="CheckinDate";
-    public static final String SIXTH_COLUMN="CheckoutDate";
-    public static final String SEVENTH_COLUMN="RoomType";
-    public static final String EIGHTH_COLUMN="TotalPrice";
+    public static final String SECOND_COLUMN="HotelName";
+    public static final String THIRD_COLUMN="NumberofRooms";
+    public static final String FOURTH_COLUMN="CheckinDate";
+    public static final String FIFTH_COLUMN="RoomType";
 
     public ListViewAdapter(Activity activity,ArrayList<HashMap<String, String>> list){
         super();
@@ -56,9 +53,6 @@ public class ListViewAdapter extends BaseAdapter{
         TextView txtThird;
         TextView txtFourth;
         TextView txtFifth;
-        TextView txtSixth;
-        TextView txtSeventh;
-        TextView txtEigth;
     }
 
     @Override
@@ -75,13 +69,10 @@ public class ListViewAdapter extends BaseAdapter{
             holder=new ViewHolder();
 
             holder.txtFirst=(TextView) convertView.findViewById(R.id.StartDate);
-            holder.txtSecond=(TextView) convertView.findViewById(R.id.StartTime);
-            holder.txtThird=(TextView) convertView.findViewById(R.id.HotelName);
-            holder.txtFourth=(TextView) convertView.findViewById(R.id.NumberofRooms);
-            holder.txtFifth=(TextView) convertView.findViewById(R.id.CheckinDate);
-            holder.txtSixth=(TextView) convertView.findViewById(R.id.CheckoutDate);
-            holder.txtSeventh=(TextView) convertView.findViewById(R.id.Roomtype);
-            holder.txtEigth=(TextView) convertView.findViewById(R.id.Price);
+            holder.txtSecond=(TextView) convertView.findViewById(R.id.HotelName);
+            holder.txtThird=(TextView) convertView.findViewById(R.id.NumberofRooms);
+            holder.txtFourth=(TextView) convertView.findViewById(R.id.CheckinDate);
+            holder.txtFifth=(TextView) convertView.findViewById(R.id.Roomtype);
 
             convertView.setTag(holder);
         }else{
@@ -95,9 +86,6 @@ public class ListViewAdapter extends BaseAdapter{
         holder.txtThird.setText(map.get(THIRD_COLUMN));
         holder.txtFourth.setText(map.get(FOURTH_COLUMN));
         holder.txtFifth.setText(map.get(FIFTH_COLUMN));
-        holder.txtSixth.setText(map.get(SIXTH_COLUMN));
-        holder.txtSeventh.setText(map.get(SEVENTH_COLUMN));
-        holder.txtEigth.setText(map.get(EIGHTH_COLUMN));
 
         return convertView;
     }

@@ -17,7 +17,7 @@
         android:text="First" />
 
     <TextView
-        android:id="@+id/HotelName"
+        android:id="@+id/StartTime"
         android:layout_alignParentLeft="true"
         android:layout_height="wrap_content"
         android:paddingTop="50dp"
@@ -27,7 +27,7 @@
         android:layout_weight="5"
         android:text="Second"/>
     <TextView
-        android:id="@+id/NumberofRooms"
+        android:id="@+id/HotelName"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:paddingTop="50dp"
@@ -37,7 +37,7 @@
         android:layout_weight="5"
         android:text="Third"/>
     <TextView
-        android:id="@+id/CheckinDate"
+        android:id="@+id/NumberofRooms"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
@@ -47,7 +47,7 @@
         android:layout_weight="5"
         android:text="Fourth"/>
     <TextView
-        android:id="@+id/Roomtype"
+        android:id="@+id/CheckinDate"
         android:layout_height="wrap_content"
         android:paddingTop="50dp"
         android:layout_width="wrap_content"
@@ -56,6 +56,36 @@
         android:layout_marginRight="10dp"
         android:layout_weight="5"
         android:text="Fifth"/>
+    <TextView
+        android:id="@+id/CheckoutDate"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Sixth"/>
+    <TextView
+        android:id="@+id/RoomType"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Seventh"/>
+    <TextView
+        android:id="@+id/TotalPrice"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Eigth"/>
 
 
 </LinearLayout>

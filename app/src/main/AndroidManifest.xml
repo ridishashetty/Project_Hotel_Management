@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReservationList"></activity>
+        <activity android:name=".SpecificReservation"></activity>
+        <activity android:name=".ReservationList" />
         <activity
             android:name=".DashBoardActivity"
             android:theme="@style/AppTheme" />
