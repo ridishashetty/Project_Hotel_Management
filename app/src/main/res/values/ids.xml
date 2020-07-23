@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="viewPending" type="id"/>
+    <item name="summRow" type="id"/>
+    <item name="reqRow" type="id"/>
+</resources>

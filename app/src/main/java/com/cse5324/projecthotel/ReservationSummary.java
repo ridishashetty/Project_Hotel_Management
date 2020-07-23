@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,8 @@ public class ReservationSummary extends AppCompatActivity {
         setContentView(R.layout.request_reservations);
 
         getSupportActionBar().setTitle("View Reservation Summary");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //go back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //go ba
+        // ck button
 
         //Logout
         final Button button= findViewById(R.id.logout);
@@ -62,7 +64,7 @@ public class ReservationSummary extends AppCompatActivity {
         for(int i=1;i<4;i++)
         {
             TableRow trMain = new TableRow(this);
-            trMain.setId(View.generateViewId());
+            trMain.setId(R.id.summRow+i);
             trMain.setBackgroundColor(Color.parseColor("#ffffff"));
             trMain.callOnClick();
             TableLayout.LayoutParams params = new TableLayout.LayoutParams(
@@ -73,7 +75,7 @@ public class ReservationSummary extends AppCompatActivity {
             trMain.setLayoutParams(params);
             trMain.setWeightSum(1f);
             //picture load
-            int id = getResources().getIdentifier("h"+i, "drawable", getPackageName());
+            int id = getResources().getIdentifier("r"+i, "drawable", getPackageName());
             Drawable draw = getResources().getDrawable(id);
             //ImageView pic = findViewById(R.id.roomPicture);
             ImageView pic = new ImageView(this);
@@ -101,7 +103,7 @@ public class ReservationSummary extends AppCompatActivity {
             miniTable.setLayoutParams(p);
 
             //id
-            TableRow tr = new TableRow(this);
+       /*     TableRow tr = new TableRow(this);
             TextView th = new TextView(this);
             th.setTypeface(null, Typeface.BOLD);
             th.setText("n: ");
@@ -110,7 +112,7 @@ public class ReservationSummary extends AppCompatActivity {
             td.setTextSize(12);
             tr.addView(th);
             tr.addView(td);
-            miniTable.addView(tr);
+            miniTable.addView(tr); */
 
             //Start Date
             TableRow tr0 = new TableRow(this);
@@ -119,7 +121,7 @@ public class ReservationSummary extends AppCompatActivity {
             th0.setText("Start Date: ");
             th0.setTextSize(12);
             TextView td0 = new TextView(this);
-            td0.setText("<dateFrom db>");        //get date from db
+            td0.setText("2020-07-24");        //get date from db
             td0.setTextSize(12);
             tr0.addView(th0);
             tr0.addView(td0);
@@ -132,7 +134,7 @@ public class ReservationSummary extends AppCompatActivity {
             th1.setText("Start Time: ");
             th1.setTextSize(12);
             TextView td1 = new TextView(this);
-            td1.setText("<timeFrom db>");        //get date from db
+            td1.setText("12:00 pm");        //get date from db
             td1.setTextSize(12);
             tr1.addView(th1);
             tr1.addView(td1);
@@ -164,14 +166,22 @@ public class ReservationSummary extends AppCompatActivity {
             tr3.addView(td3);
             miniTable.addView(tr3);
 
+
             //Arrival Time
             TableRow tr4 = new TableRow(this);
             TextView th4 = new TextView(this);
             th4.setTypeface(null, Typeface.BOLD);
-            th4.setText("Arrival Time: ");
+            th4.setText("Arrival Date: ");
             th4.setTextSize(12);
             TextView td4 = new TextView(this);
-            td4.setText("<timeFrom db>");        //get date from db
+            if(4*i<10)
+            {
+                td4.setText("02/0"+4*i+"/2020");        //get date from db
+            }
+            else
+            {
+                td4.setText("02/"+4*i+"/2020");        //get date from db
+            }
             td4.setTextSize(12);
             tr4.addView(th4);
             tr4.addView(td4);
@@ -181,9 +191,54 @@ public class ReservationSummary extends AppCompatActivity {
             trMain.addView(pic);
             trMain.addView(miniTable);
         }
+        TableRow tableRow = new TableRow(this);
+        tableRow.setBackgroundColor(Color.WHITE);
+        TableLayout.LayoutParams tp = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.MATCH_PARENT
+        );
+        tp.setMargins(0, 30, 0, 0);
+        tableRow.setLayoutParams(tp);
+        Button pend = new Button(this);
+        pend.setId(R.id.viewPending);
+        pend.setText("View Pending reservations");
+        pend.setBackgroundColor(Color.parseColor("#2C1EC6"));
+        pend.setPaddingRelative(20, 12, 20, 12);
+        pend.setTextColor(Color.WHITE);
+        TableRow.LayoutParams p = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.MATCH_PARENT
+        );
+        p.gravity= Gravity.CENTER_HORIZONTAL;
+        pend.setLayoutParams(p);
+        tableRow.addView(pend);
+        table.addView(tableRow);
+
         ll.addView(table);
         sv.addView(ll);
         ((LinearLayout) linearLayout).addView(sv);
+
+        Button btn = findViewById(R.id.viewPending);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReservationSummary.this, PendingReservations.class));
+            }
+        });
+        ////Clickable rows
+        for(int i=1;i<4;i++){
+            final int n = i;
+            TableRow t= findViewById(R.id.summRow+i);
+            t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ReservationSummary.this, FetchContent.class);
+                    intent.putExtra("value", Integer.toString(n));
+                    intent.putExtra("from", "summary");
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     //go back button to work

@@ -78,6 +78,9 @@
         <activity
             android:name=".ReservationSummaryFilter"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FetchContent"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

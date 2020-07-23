@@ -1,6 +1,7 @@
 package com.cse5324.projecthotel;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -102,6 +103,14 @@ public class RequestReservationFilter extends AppCompatActivity {
                 {
                     findViewById(R.id.time).setVisibility(View.GONE);
                 }
+            }
+        });
+
+        final Button load = findViewById(R.id.load);
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

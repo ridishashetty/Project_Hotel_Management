@@ -28,12 +28,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
 
     public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context, DATABASE_NAME, factory, version);
     }
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
-        //Consistent manager and admin data that should be same
+        ///////////////////////////////////////////////////////////////////
         //admin
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues admin = new ContentValues();
@@ -136,9 +136,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {}
     }
 
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME TEXT,PASSWORD INTEGER,FIRSTNAME TEXT,LASTNAME TEXT,PHONE INTEGER,EMAIL INTEGER,ADDRESS INTEGER, CITY TEXT,STATE TEXT,ZIPCODE INTEGER,CREDITCARDNO INTEGER,CREDITCARDEXPIRY DATE,ROLE TEXT)");
+        db.execSQL("Create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME TEXT,PASSWORD INTEGER, FIRSTNAME TEXT,LASTNAME TEXT,PHONE INTEGER,EMAIL INTEGER, ADDRESS INTEGER, CITY TEXT,STATE TEXT,ZIPCODE INTEGER,CREDITCARDNO INTEGER,CREDITCARDEXPIRY DATE,ROLE TEXT)");
     }
 
     public boolean insertData(String username,String password,String firstname,String lastname,String phone,String email,String address,String city,

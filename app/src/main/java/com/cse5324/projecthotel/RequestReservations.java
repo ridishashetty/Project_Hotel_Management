@@ -62,6 +62,7 @@ public class RequestReservations extends AppCompatActivity {
         for(int i=1;i<6;i++)
         {
             TableRow trMain = new TableRow(this);
+            trMain.setId(R.id.reqRow+i);
             trMain.setBackgroundColor(Color.parseColor("#ffffff"));
             TableLayout.LayoutParams params = new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -99,13 +100,13 @@ public class RequestReservations extends AppCompatActivity {
             miniTable.setLayoutParams(p);
 
             //All Details:
-            TableRow tr0 = new TableRow(this);
+       /*     TableRow tr0 = new TableRow(this);
             TextView th0 = new TextView(this);
             th0.setTypeface(null, Typeface.BOLD);
             th0.setTextSize(12);
             th0.setText(""+i);
             tr0.addView(th0);
-            miniTable.addView(tr0);
+            miniTable.addView(tr0); */
 
             //Hotel Name
             TableRow tr1 = new TableRow(this);
@@ -140,7 +141,7 @@ public class RequestReservations extends AppCompatActivity {
             th3.setText("Room Type: ");
             th3.setTextSize(12);
             TextView td3 = new TextView(this);
-            td3.setText("Deluxe Double");        //get bed from db
+            td3.setText("Standard");        //get bed from db
             td3.setTextSize(12);
             tr3.addView(th3);
             tr3.addView(td3);
@@ -153,7 +154,7 @@ public class RequestReservations extends AppCompatActivity {
             th4.setText("Arrival Date: ");
             th4.setTextSize(12);
             TextView td4 = new TextView(this);
-            td4.setText("<dateFrom db>");        //get date from db
+            td4.setText("07-27-2020");        //get date from db
             td4.setTextSize(12);
             tr4.addView(th4);
             tr4.addView(td4);
@@ -166,7 +167,7 @@ public class RequestReservations extends AppCompatActivity {
             th5.setText("Number of Nights: ");
             th5.setTextSize(12);
             TextView td5 = new TextView(this);
-            td5.setText("<from db>");        //get time from db
+            td5.setText("5");        //get time from db
             td5.setTextSize(12);
             tr5.addView(th5);
             tr5.addView(td5);
@@ -179,7 +180,7 @@ public class RequestReservations extends AppCompatActivity {
             th6.setText("Total Price: ");
             th6.setTextSize(12);
             TextView td6 = new TextView(this);
-            td6.setText("<calculated>");        //get time from db
+            td6.setText("100 dollars");        //get time from db
             td6.setTextSize(12);
             tr6.addView(th6);
             tr6.addView(td6);
@@ -192,19 +193,21 @@ public class RequestReservations extends AppCompatActivity {
         ll.addView(table);
         sv.addView(ll);
         ((LinearLayout) linearLayout).addView(sv);
-/*
-            //findViewById(R.id.roomPicture).setBackground(draw); //room picture
-            TextView hotel = (TextView) findViewById(R.id.td); //hotel name
-            hotel.setText("Maverick");
-            TextView rtype = (TextView) findViewById(R.id.td1); //room type
-            rtype.setText("Deluxe");
-            TextView bed = (TextView) findViewById(R.id.td2); //bed
-            bed.setText("Double");
-            TextView strtDate = (TextView) findViewById(R.id.td3); //start date - arrange in chronological order
-            strtDate.setText("date_here");
-            TextView strtTime = (TextView) findViewById(R.id.td4); //start time - arrange in chronological order
-            strtTime.setText("time_here");
-*/
+
+        ////Clickable rows
+        for(int i=1;i<6;i++){
+            final int n = i;
+            TableRow t= findViewById(R.id.reqRow+i);
+            t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(RequestReservations.this, FetchContent.class);
+                    intent.putExtra("value", Integer.toString(n));
+                    intent.putExtra("from", "request");
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     //go back button to work

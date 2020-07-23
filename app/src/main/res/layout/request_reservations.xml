@@ -26,7 +26,7 @@
             android:layout_margin="8dp"
             android:layout_width="0.25in"
             android:layout_height="0.25in"
-            android:background="@drawable/hamburger"/>
+            android:background="@drawable/filter"/>
     </GridLayout>
     <!--
     <androidx.constraintlayout.widget.ConstraintLayout

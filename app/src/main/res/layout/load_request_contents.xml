@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingHorizontal="0.2in"
+            android:background="#2C1EC6"
+            android:text="Logout"
+            android:layout_gravity="end"
+            android:textColor="@color/white" />
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/picture"
+            android:layout_width="match_parent"
+            android:layout_height="2in">
+
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/output"
+            />
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TableLayout
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tabLay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th1"
+                        android:layout_width="match_parent"
+                        android:text="Start Date:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td1"
+                        android:layout_width="match_parent"
+                        android:text="2020-07-24"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th2"
+                        android:layout_width="match_parent"
+                        android:text="Start Time:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td2"
+                        android:layout_width="match_parent"
+                        android:text="12:00:00 noon"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th"
+                        android:layout_width="match_parent"
+                        android:text="Hotel Name:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td"
+                        android:layout_width="match_parent"
+                        android:text="Maverick"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th3"
+                        android:layout_width="match_parent"
+                        android:text="Room Type:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td3"
+                        android:layout_width="match_parent"
+                        android:text="Standard"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th4"
+                        android:layout_width="match_parent"
+                        android:text="Number of Rooms:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td4"
+                        android:layout_width="match_parent"
+                        android:text="1"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th5"
+                        android:layout_width="match_parent"
+                        android:text="Checkin date:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td5"
+                        android:layout_width="match_parent"
+                        android:text="2020-07-25"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th6"
+                        android:layout_width="match_parent"
+                        android:text="Checkout date:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td6"
+                        android:layout_width="match_parent"
+                        android:text="2024-07-31"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/th7"
+                        android:layout_width="match_parent"
+                        android:text="Total Price:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/td7"
+                        android:layout_width="match_parent"
+                        android:text="150 dollars"
+                        android:textSize="22dp"
+                        android:layout_weight="1.5">
+
+                    </TextView>
+                </TableRow>
+                <TableRow>
+                    <Button
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="match_parent"
+                        android:text="Request"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
