@@ -18,18 +18,32 @@
             android:text="Logout"
             android:layout_gravity="end"
             android:textColor="@color/white" />
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:id="@+id/picture"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="2in">
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/picture"
+                android:layout_width="match_parent"
+                android:layout_height="2in">
 
-        </ImageView>
+            </ImageView>
+            <Button
+                android:id="@+id/modify"
+                android:background="#2C1EC6"
+                android:textColor="@color/white"
+                android:layout_width="1.7in"
+                android:layout_height="0.35in"
+                android:textSize="20dp"
+                android:text="Modify Details"
+                android:layout_gravity="center|bottom" />
+        </FrameLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/output"
             />
+        
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
@@ -193,6 +207,7 @@
                 </TableRow>
                 <TableRow>
                     <Button
+                        android:id="@+id/RequestReservation"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"

@@ -18,6 +18,10 @@ public class AdminScreen extends AppCompatActivity{     //implements AdapterView
         setContentView(R.layout.admin_screen);
 
         getSupportActionBar().setTitle("Admin Home"); // for set actionbar title
+        //What's the user id?
+        Intent i = getIntent();
+        String info = i.getStringExtra("user_id");
+        Toast.makeText(AdminScreen.this, "user id: "+info, Toast.LENGTH_SHORT).show();
 
         //Logout
         final Button button= findViewById(R.id.logout);

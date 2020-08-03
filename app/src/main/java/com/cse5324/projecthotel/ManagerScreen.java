@@ -22,6 +22,10 @@ public class ManagerScreen extends AppCompatActivity {  ///implements AdapterVie
         setContentView(R.layout.manager_screen);
 
         getSupportActionBar().setTitle("Manager Home"); // for set actionbar title
+        //What's the user id?
+        Intent i = getIntent();
+        String info = i.getStringExtra("user_id");
+        Toast.makeText(ManagerScreen.this, "user id: "+info, Toast.LENGTH_SHORT).show();
 
         //If menu needed, unhide this + xml
      /*   Spinner spinner = (Spinner) findViewById(R.id.spinnerM);

@@ -17,16 +17,11 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.guest_screen);
 
         getSupportActionBar().setTitle("Guest Home");
+        //What's the user id?
+        Intent i = getIntent();
+        final String info = i.getStringExtra("user_id");
+        Toast.makeText(GuestScreen.this, "user id: "+info, Toast.LENGTH_SHORT).show();
 
-    //Unhide when you unhide spinnerG
-   /*     Spinner spinner = (Spinner) findViewById(R.id.spinnerG);
-        //To get values from the array created in strings.xml and send to the spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.guest_functions, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-    */
         //Logout
         final Button button= findViewById(R.id.logout);
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +48,9 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             public void onClick(View v) {
                 //Goes to Request Reservation page
                 //Toast.makeText(GuestScreen.this, "Request Hotel Reservations", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GuestScreen.this, RequestReservations.class));
+                final Intent intent = new Intent(GuestScreen.this, RequestReservations.class);
+                intent.putExtra("user_id", info);
+                startActivity(intent);
             }
         });
 
@@ -63,19 +60,11 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             public void onClick(View v) {
                 //Goes to Summary page
                 //Toast.makeText(GuestScreen.this, "View Reservations Summary", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GuestScreen.this, ReservationSummary.class));
+                final Intent intent = new Intent(GuestScreen.this, ReservationSummary.class);
+                intent.putExtra("user_id", info);
+                startActivity(intent);
             }
         });
-
-      /*  final Button b4=findViewById(R.id.pending);
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Goes to Pending Reservations page
-                //Toast.makeText(GuestScreen.this, "View Pending Reservations", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(GuestScreen.this, PendingReservations.class));
-            }
-        }); */
     }
 
     @Override
