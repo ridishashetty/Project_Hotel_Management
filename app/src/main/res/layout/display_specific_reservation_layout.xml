@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- row.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/StartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:paddingTop="50dp"
+        android:text="First" />
+
+    <TextView
+        android:id="@+id/StartTime"
+        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_weight="5"
+        android:text="Second"/>
+    <TextView
+        android:id="@+id/HotelName"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_weight="5"
+        android:text="Third"/>
+    <TextView
+        android:id="@+id/NumberofRooms"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_weight="5"
+        android:text="Fourth"/>
+    <TextView
+        android:id="@+id/CheckinDate"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Fifth"/>
+    <TextView
+        android:id="@+id/CheckoutDate"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Sixth"/>
+    <TextView
+        android:id="@+id/RoomType"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Seventh"/>
+    <TextView
+        android:id="@+id/TotalPrice"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="5"
+        android:text="Eigth"/>
+
+
+</LinearLayout>

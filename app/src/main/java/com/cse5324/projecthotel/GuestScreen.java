@@ -54,7 +54,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        final Button b3=findViewById(R.id.summary);
+        final Button b3=findViewById(R.id.confirmReserve);
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

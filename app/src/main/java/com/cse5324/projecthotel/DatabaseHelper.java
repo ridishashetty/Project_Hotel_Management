@@ -10,8 +10,9 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "test";
+    public static final String DATABASE_NAME = "test.db";
     public static final String TABLE_NAME = "testtable";
+    public static final String TABLE_NAME1 = "user_reservations";
     public static final String COL_1 = "USERNAME";
     public static final String COL_2 = "PASSWORD";
     public static final String COL_3 = "FIRSTNAME";
@@ -75,10 +76,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ////////////////
         return cursor;
     }
+    public Cursor ViewData(String hotel, String date)
+    {
+        db = this.getReadableDatabase();
+        String viewlistquery = "SELECT * FROM "+TABLE_NAME1+" WHERE HOTELNAME = '" + hotel + "' AND CHECKINDATE >= '" + date + "'";
+        Cursor cursor = db.rawQuery(viewlistquery, null);
+        return  cursor;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
     public Cursor getUsers()
     {

@@ -9,19 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ConfirmReservation"></activity>
+        <activity android:name=".CreditCardInformation" />
+        <activity android:name=".SpecificReservation" />
+        <activity android:name=".ReservationList" />
         <activity
             android:name=".DashBoardActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".MainAppScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-<!--MANAGER-->
+        </activity> <!-- MANAGER -->
         <activity android:name=".ManagerScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,9 +42,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AvailableRoom"
-            android:theme="@style/AppTheme" />
-
-        <!--ADMIN-->
+            android:theme="@style/AppTheme" /> <!-- ADMIN -->
         <activity android:name=".AdminScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,9 +53,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AdminProfile"
-            android:theme="@style/AppTheme" />
-
-        <!--GUEST-->
+            android:theme="@style/AppTheme" /> <!-- GUEST -->
         <activity android:name=".GuestScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
