@@ -92,6 +92,7 @@ public class RequestReservations extends AppCompatActivity {
             int i = 0; //row count
             while(cursor.moveToNext() && i<count)
             {
+                Log.i("here: ",Integer.toString(count));
                 int hid = cursor.getInt(1); //hotel id
                 String rt = cursor.getString(3).toLowerCase(); // room type
                 TableRow trMain = new TableRow(this);
@@ -107,6 +108,7 @@ public class RequestReservations extends AppCompatActivity {
 
                 //picture load
                 int id = getResources().getIdentifier(rt+hid, "drawable", getPackageName());
+                Log.i("here: ",rt+""+hid);
                 Drawable draw = getResources().getDrawable(id);
                 //ImageView pic = findViewById(R.id.roomPicture);
                 ImageView pic = new ImageView(this);

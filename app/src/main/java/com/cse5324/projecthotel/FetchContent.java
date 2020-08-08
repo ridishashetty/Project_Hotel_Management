@@ -108,7 +108,7 @@ public class FetchContent extends AppCompatActivity {
         });
         //Request submit button
         final Button btn = findViewById(R.id.RequestReservation);
-        btn.setOnClickListener(new View.OnClickListener() {
+/*        btn.setOnClickListener(new View.OnClickListener() {
             TextView tv1 = findViewById(R.id.td5);
             TextView tv2 = findViewById(R.id.td6);
             @Override
@@ -132,7 +132,7 @@ public class FetchContent extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-        });
+        }); */
 
         //Toast.makeText(FetchContent.this, row_id, Toast.LENGTH_SHORT).show();
 
