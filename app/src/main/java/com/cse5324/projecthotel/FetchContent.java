@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -41,60 +42,97 @@ public class FetchContent extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         hdb = new hotelDatabase(this);
-        int hid=0;
-        String rt="";
+
         Intent i = getIntent();
         final String user_id = i.getStringExtra("user_id");
-        final String room_id = i.getStringExtra("row_num");
+        int hid=i.getIntExtra("hotelID", 0);
+        int numOfRoom=i.getIntExtra("numRoom", 1);
+        String rt=i.getStringExtra("roomType");
+        //final String room_id = i.getStringExtra("row_num");
         String lastPage = i.getStringExtra("from");
 
         if(lastPage.equals("summary")) {
             setContentView(R.layout.load_content);
+            Toast.makeText(FetchContent.this, lastPage, Toast.LENGTH_SHORT).show();
         }
-        else if(lastPage.equals("request")) {
+        else if(lastPage.equals("request"))
+        {
             setContentView(R.layout.load_request_contents);
-            Cursor cursor = hdb.getRoomById(room_id);
-            if(cursor.getCount()==0)
-            {
-                Toast.makeText(FetchContent.this, "ERROR!", Toast.LENGTH_SHORT).show();
+            //Cursor cursor = hdb.getRoomById(room_id);
+            //Toast.makeText(FetchContent.this, cursor.getString(2), Toast.LENGTH_SHORT).show();
+            TextView date = findViewById(R.id.td1);
+            TextView time = findViewById(R.id.td2);
+
+            Calendar cal = Calendar.getInstance();
+            Date today = cal.getTime();
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
+            date.setText(sdf1.format(today));
+            time.setText("12:00:00");
+            TextView type = findViewById(R.id.td3);
+            type.setText(rt);
+            TextView checkin = findViewById(R.id.td5);
+            checkin.setText(sdf1.format(today));
+            TextView checkout = findViewById(R.id.td6);
+
+            TextView numR=findViewById(R.id.td4);
+            numR.setText(Integer.toString(numOfRoom));
+
+            String now = today.toString();
+            Calendar c = Calendar.getInstance();
+            try{
+                c.setTime(sdf1.parse(now));
             }
-            else
-            {
-                if(cursor.moveToFirst())
-                {
-                    Toast.makeText(FetchContent.this, cursor.getString(2), Toast.LENGTH_SHORT).show();
-                    //Log.i("msg: ", cursor.getColumnCount()+"");
-                    hid = cursor.getInt(1); //hotel id
-                    rt = cursor.getString(3).toLowerCase(); // room type
-                    TextView date = findViewById(R.id.td1);
-                    TextView time = findViewById(R.id.td2);
+            catch(ParseException e){ e.printStackTrace(); }
+            //Incrementing the date by 30
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            checkout.setText(sdf1.format(c.getTime()));
+            //Image load
+            int id = getResources().getIdentifier(rt.toLowerCase()+hid, "drawable", getPackageName());
+            Drawable draw = getResources().getDrawable(id);
+            findViewById(R.id.picture).setBackground(draw);
 
-                    Calendar cal = Calendar.getInstance();
-                    Date today = cal.getTime();
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd-yyyy");
-                    date.setText(sdf1.format(today));
-                    time.setText("12:00:00");
-                    TextView type = findViewById(R.id.td3);
-                    type.setText(rt);
-                    TextView checkin = findViewById(R.id.td5);
-                    checkin.setText(sdf1.format(today));
-                    TextView checkout = findViewById(R.id.td6);
+            //Request submit button
+            final Button btn = findViewById(R.id.RequestReservation);
+            btn.setOnClickListener(new View.OnClickListener() {
+                TextView strTime=findViewById(R.id.td2);
+                TextView hotel=findViewById(R.id.td);
+                TextView rType=findViewById(R.id.td3);
+                TextView nOfr=findViewById(R.id.td4);
+                EditText from = findViewById(R.id.td5);
+                EditText tod = findViewById(R.id.td6);
+                TextView price=findViewById(R.id.td7);
 
-                    String now = today.toString();
-                    Calendar c = Calendar.getInstance();
-                    try{
-                        c.setTime(sdf1.parse(now));
+                @Override
+                public void onClick(View v) {
+                    ContentValues cv = new ContentValues();
+                    cv.put("user_id", user_id);
+                    cv.put("fromDate", from.getText().toString());
+                    cv.put("toDate", tod.getText().toString());
+                    //cv.put("room_id", room_id);
+                    if(hdb.insertReservation(cv) == false)
+                    {
+                        Toast.makeText(FetchContent.this, "Not Inserted to Reservation table", Toast.LENGTH_SHORT).show();
                     }
-                    catch(ParseException e){ e.printStackTrace(); }
-                    //Incrementing the date by 30
-                    c.add(Calendar.DAY_OF_MONTH, 30);
-                    checkout.setText(sdf1.format(c.getTime()));
+                    else
+                    {
+                        ///go to summary page
+                        final Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
+                        intent.putExtra("user_id", user_id);
+                        intent.putExtra("inTime", strTime.getText());
+                        intent.putExtra("hotel", hotel.getText());
+                        intent.putExtra("rType", rType.getText());
+                        intent.putExtra("numRooms", nOfr.getText());
+                        intent.putExtra("checkin", from.getText());
+                        intent.putExtra("checkout", tod.getText());
+                        intent.putExtra("amount", price.getText());
+                        startActivity(intent);
+                    }
                 }
-            }
+            });
         }
         else
         {
-            //error
+            Toast.makeText(FetchContent.this, "Where is this coming from?", Toast.LENGTH_SHORT).show();
         }
 
         //Logout
@@ -106,56 +144,24 @@ public class FetchContent extends AppCompatActivity {
                 startActivity(new Intent(FetchContent.this, MainAppScreenActivity.class));
             }
         });
-        //Request submit button
-        final Button btn = findViewById(R.id.RequestReservation);
-/*        btn.setOnClickListener(new View.OnClickListener() {
-            TextView tv1 = findViewById(R.id.td5);
-            TextView tv2 = findViewById(R.id.td6);
-            @Override
-            public void onClick(View v) {
-                ContentValues cv = new ContentValues();
-                cv.put("user_id", user_id);
-                cv.put("fromDate", tv1.getText().toString());
-                cv.put("toDate", tv2.getText().toString());
-                cv.put("room_id", room_id);
-                if(hdb.insertReservation(cv) == false)
-                {
-                    Toast.makeText(FetchContent.this, "Not Inserted to Reservation table", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    ///alter database rooms to change status -> unavailable
-                    hdb.updateRoomStatus("unavailable", room_id);
-                    ///go to summary page
-                    final Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
-                    intent.putExtra("user_id", user_id);
-                    startActivity(intent);
-                }
-            }
-        }); */
-
         //Toast.makeText(FetchContent.this, row_id, Toast.LENGTH_SHORT).show();
-
-        int id = getResources().getIdentifier(rt+hid, "drawable", getPackageName());
-        Drawable draw = getResources().getDrawable(id);
-        findViewById(R.id.picture).setBackground(draw);
 
         ////editable
         final TableLayout tbl = findViewById(R.id.tabLay);
-        tbl.setOnClickListener(new View.OnClickListener() {
+    /*    tbl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(FetchContent.this, GuestProfile.class));
-               /* for(int i = 1; i<=7; i++)
+                for(int i = 1; i<=7; i++)
                 {
                     String a = "td"+i;
                     findViewById(Integer.valueOf(a)).setCursorVisible(true);
                     findViewById(Integer.valueOf(a)).setFocusableInTouchMode(true);
                     findViewById(Integer.valueOf(a)).setInputType(InputType.TYPE_CLASS_TEXT);
                     findViewById(Integer.valueOf(a)).requestFocus();
-                }*/
+                }
             }
-        });
+        }); */
     }
     //go back button to work
     @Override

@@ -28,7 +28,7 @@
                 android:layout_height="2in">
 
             </ImageView>
-            <Button
+        <!--    <Button
                 android:id="@+id/modify"
                 android:background="#2C1EC6"
                 android:textColor="@color/white"
@@ -37,6 +37,7 @@
                 android:textSize="20dp"
                 android:text="Modify Details"
                 android:layout_gravity="center|bottom" />
+                -->
         </FrameLayout>
         <TextView
             android:layout_width="match_parent"
@@ -82,14 +83,14 @@
                         android:layout_weight="0.5">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/td2"
                         android:layout_width="match_parent"
+                        android:layout_weight="1.5"
+                        android:hint="24-hour format"
                         android:text="12:00:00 noon"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
-
-                    </TextView>
+                        android:textSize="22dp"></TextView>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -120,12 +121,14 @@
                         android:layout_weight="0.5">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/td3"
                         android:layout_width="match_parent"
+                        android:layout_height="47dp"
+                        android:layout_weight="1.5"
                         android:text="Standard"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:textSize="22dp">
 
                     </TextView>
                 </TableRow>
@@ -145,7 +148,6 @@
                         android:text="1"
                         android:textSize="22dp"
                         android:layout_weight="1.5">
-
                     </TextView>
                 </TableRow>
                 <TableRow>
@@ -158,14 +160,16 @@
                         android:layout_weight="0.5">
 
                     </TextView>
-                    <TextView
+
+                    <EditText
                         android:id="@+id/td5"
                         android:layout_width="match_parent"
+                        android:layout_weight="1.5"
+                        android:hint="mm-dd-yyyy"
                         android:text="2020-07-25"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:textSize="22dp">
 
-                    </TextView>
+                    </EditText>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -177,14 +181,16 @@
                         android:layout_weight="0.5">
 
                     </TextView>
-                    <TextView
+
+                    <EditText
                         android:id="@+id/td6"
                         android:layout_width="match_parent"
+                        android:layout_weight="1.5"
+                        android:hint="mm-dd-yyyy"
                         android:text="2024-07-31"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:textSize="22dp">
 
-                    </TextView>
+                    </EditText>
                 </TableRow>
                 <TableRow>
                     <TextView

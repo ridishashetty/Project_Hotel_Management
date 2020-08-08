@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class RequestReservations extends AppCompatActivity {
@@ -36,10 +37,10 @@ public class RequestReservations extends AppCompatActivity {
         //What's the user id?
         Intent getI = getIntent();
         final String info = getI.getStringExtra("user_id");
-        Toast.makeText(RequestReservations.this, "user id: "+info, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(RequestReservations.this, "user id: " + info, Toast.LENGTH_SHORT).show();
 
         //Logout
-        final Button button= findViewById(R.id.logout);
+        final Button button = findViewById(R.id.logout);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class RequestReservations extends AppCompatActivity {
             }
         });
         //OpenMenu
-        final Button btnMenu= findViewById(R.id.filterMenu);
+        final Button btnMenu = findViewById(R.id.filterMenu);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,44 +72,47 @@ public class RequestReservations extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         table.setLayoutParams(param);
-        param.setMargins(5,5,5,5);
+        param.setMargins(5, 5, 5, 5);
 
         hdb = new hotelDatabase(this);
-        final Cursor cursor = hdb.getRoom();
-        int count = cursor.getCount();
-        if(cursor.getCount()==0)
+
+    /*
+                final int cs = cursor.getInt(0);
+                trMain.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        final Intent intent = new Intent(RequestReservations.this, FetchContent.class);
+                        intent.putExtra("row_num", Integer.toString(cs));
+                        intent.putExtra("user_id", info);
+                        //intent.putExtra("room_id", cursor.getString(0));
+                        intent.putExtra("from", "request");
+                        startActivity(intent);
+                    }
+                });
+
+    } */
+        final int hid = 1; //hotel id
+        String[] rt = {"Standard", "Deluxe", "Suite"}; // room type
+        int numOfroom=1;
+        for (int i = 0; i < 3; i++) //3 type's of room
         {
-            Log.i("msg: ", "no data?");
-            TableRow trMain = new TableRow(this);
-            TextView none = new TextView(this);
-            none.setText("No reservations are currently available");
-            none.setTextSize(20);
-            trMain.addView(none);
-            table.addView(trMain);
-        }
-        else
-        {
-            Log.i("msg: ", "there is data!");
-            int i = 0; //row count
-            while(cursor.moveToNext() && i<count)
+            Log.i("ALL: ", "hid="+hid+", rt="+rt[i]+", numOfroom="+numOfroom);
+            if(hdb.getRoomCount(rt[i],hid)>numOfroom)
             {
-                Log.i("here: ",Integer.toString(count));
-                int hid = cursor.getInt(1); //hotel id
-                String rt = cursor.getString(3).toLowerCase(); // room type
+                //Log.i("here: ",Integer.toString(count));
                 TableRow trMain = new TableRow(this);
-                trMain.setId(R.id.reqRow+i);
+                trMain.setId(R.id.reqRow + i);
                 trMain.setBackgroundColor(Color.parseColor("#ffffff"));
                 TableLayout.LayoutParams params = new TableLayout.LayoutParams(
                         TableLayout.LayoutParams.MATCH_PARENT,
                         TableLayout.LayoutParams.MATCH_PARENT
                 );
-                params.setMargins(5,3,5,3);
+                params.setMargins(5, 3, 5, 3);
                 trMain.setLayoutParams(params);
                 trMain.setWeightSum(1f);
 
                 //picture load
-                int id = getResources().getIdentifier(rt+hid, "drawable", getPackageName());
-                Log.i("here: ",rt+""+hid);
+                final int id = getResources().getIdentifier(rt[i].toLowerCase() + hid, "drawable", getPackageName());
+                //Log.i("here: ", rt[i].toLowerCase() + "" + hid);
                 Drawable draw = getResources().getDrawable(id);
                 //ImageView pic = findViewById(R.id.roomPicture);
                 ImageView pic = new ImageView(this);
@@ -128,22 +132,23 @@ public class RequestReservations extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT
                 );
                 p.weight = 0.65f;
-                p.setMargins(10,5,5,0);
+                p.setMargins(10, 5, 5, 0);
                 miniTable.setLayoutParams(p);
 
-                ///Room no.
+        /*        //Total Count
+                //Log.i("count", rt[i]+""+hid);
                 TableRow tr0 = new TableRow(this);
                 TextView th0 = new TextView(this);
                 th0.setTypeface(null, Typeface.BOLD);
-                th0.setText("Room No.: ");
+                th0.setText("***Total Available: ");
                 th0.setTextSize(12);
                 TextView td0 = new TextView(this);
-                td0.setText(cursor.getString(2));        //get hotel name from db
+                td0.setText(Integer.toString(hdb.getRoomCount(rt[i],hid)));        //get hotel name from db
                 td0.setTextSize(12);
                 tr0.addView(th0);
                 tr0.addView(td0);
                 miniTable.addView(tr0);
-
+        */
                 //Hotel Name
                 TableRow tr1 = new TableRow(this);
                 TextView th1 = new TextView(this);
@@ -164,7 +169,7 @@ public class RequestReservations extends AppCompatActivity {
                 th2.setText("Number of Rooms: ");
                 th2.setTextSize(12);
                 TextView td2 = new TextView(this);
-                td2.setText("1 room");        //get room type from db
+                td2.setText(numOfroom+" room(s)");
                 td2.setTextSize(12);
                 tr2.addView(th2);
                 tr2.addView(td2);
@@ -177,7 +182,7 @@ public class RequestReservations extends AppCompatActivity {
                 th3.setText("Room Type: ");
                 th3.setTextSize(12);
                 TextView td3 = new TextView(this);
-                td3.setText(rt);        //get bed from db
+                td3.setText(rt[i]);        //get bed from db
                 td3.setTextSize(12);
                 tr3.addView(th3);
                 tr3.addView(td3);
@@ -190,8 +195,8 @@ public class RequestReservations extends AppCompatActivity {
                 th4.setText("Arrival Date: ");
                 th4.setTextSize(12);
                 TextView td4 = new TextView(this);
-                /*Date date = new Date(cursor.getLong(5)); */
-                Date date=new Date();
+                //Date date = new Date("08/08/2020");
+                Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
                 td4.setText(sdf.format(date));        //get date from db
                 td4.setTextSize(12);
@@ -206,20 +211,37 @@ public class RequestReservations extends AppCompatActivity {
                 th5.setText("Number of Nights: ");
                 th5.setTextSize(12);
                 TextView td5 = new TextView(this);
-                td5.setText("30");        //get time from db
+                td5.setText("1");        //get time from db
                 td5.setTextSize(12);
                 tr5.addView(th5);
                 tr5.addView(td5);
                 miniTable.addView(tr5);
 
                 //Room price
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_WEEK);
+                String itis="";
+
+                switch (day) {
+                    case Calendar.SUNDAY:
+                    case Calendar.SATURDAY:
+                        itis="weekend";
+                        break;
+                    default:
+                        itis="weekday";
+                        break;
+                } //rt[i] itis
+                Cursor cost = hdb.getPrice(rt[i].toLowerCase(), itis);
+                cost.moveToFirst();
+                String amount=cost.getString(3);
+
                 TableRow tr6 = new TableRow(this);
                 TextView th6 = new TextView(this);
                 th6.setTypeface(null, Typeface.BOLD);
                 th6.setText("Total Price: ");
                 th6.setTextSize(12);
                 TextView td6 = new TextView(this);
-                td6.setText("100 dollars");        //get time from db
+                td6.setText(amount+" dollars");        //get price from db
                 td6.setTextSize(12);
                 tr6.addView(th6);
                 tr6.addView(td6);
@@ -228,15 +250,18 @@ public class RequestReservations extends AppCompatActivity {
                 table.addView(trMain);
                 trMain.addView(pic);
                 trMain.addView(miniTable);
-                i++;
 
-                ////////////////
-                final int cs = cursor.getInt(0);
+                final int d=hid;
+                final String r=rt[i];
+                final int n=numOfroom;
                 trMain.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         final Intent intent = new Intent(RequestReservations.this, FetchContent.class);
-                        intent.putExtra("row_num", Integer.toString(cs));
+                        //intent.putExtra("row_num", Integer.toString(cs));
                         intent.putExtra("user_id", info);
+                        intent.putExtra("hotelID", d);
+                        intent.putExtra("roomType", r);
+                        intent.putExtra("numRoom", n);
                         //intent.putExtra("room_id", cursor.getString(0));
                         intent.putExtra("from", "request");
                         startActivity(intent);
@@ -248,7 +273,6 @@ public class RequestReservations extends AppCompatActivity {
         sv.addView(ll);
         ((LinearLayout) linearLayout).addView(sv);
     }
-
     //go back button to work
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

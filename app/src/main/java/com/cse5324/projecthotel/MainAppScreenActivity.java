@@ -41,20 +41,39 @@ public class MainAppScreenActivity extends AppCompatActivity {
         String COL_12 = "CREDITCARDEXPIRY";
         String COL_13 = "ROLE";
         Cursor cs = db.getUsers();
+        if(cs.getCount()!=0)
+        {
+            String demo="";
+            while(cs.moveToNext())
+            {
+                demo=cs.getString(1);
+                if(demo.equals("SuzieQ")){
+                    break;
+                }
+            }
+            if(!demo.equals("SuzieQ"))
+            {
+                Log.i("ITTT: ","aaaahhhhhhhhhhhhhhhh");
+                db.deleteFrom();
+                //refresh page
+                finish();
+                startActivity(getIntent());
+            }
+        }
         if(cs.getCount()==0) //no data
         {
             Log.i("MSG:", "no data found");
             ContentValues admin = new ContentValues();
-            admin.put(COL_1, "Tony");
-            admin.put(COL_2, "admin");
-            admin.put(COL_3, "Tony");
-            admin.put(COL_4, "Dsouza");
-            admin.put(COL_5, "3213243242");
-            admin.put(COL_6, "admin@hotels.com");
-            admin.put(COL_7, "lives at, 120 palace, 20th street");
-            admin.put(COL_8, "nowhere");
-            admin.put(COL_9, "nothere");
-            admin.put(COL_10, "10010");
+            admin.put(COL_1, "SuzieQ");
+            admin.put(COL_2, "Password$34");
+            admin.put(COL_3, "Susan");
+            admin.put(COL_4, "Queen");
+            admin.put(COL_5, "8177772345");
+            admin.put(COL_6, "SuzieQ@mavs.uta.edu");
+            admin.put(COL_7, "5678, Straight Dr");
+            admin.put(COL_8, "Arlington");
+            admin.put(COL_9, "Tx");
+            admin.put(COL_10, "76019");
             admin.put(COL_11, "1234123412341234");
             admin.put(COL_12, "08/19/24");
             admin.put(COL_13, "a");
@@ -79,16 +98,16 @@ public class MainAppScreenActivity extends AppCompatActivity {
             if(db.insertData(m1) == false)
             {}
             ContentValues m2 = new ContentValues();
-            m2.put(COL_1, "Jacob");
-            m2.put(COL_2, "jacob123");
-            m2.put(COL_3, "Jacob");
-            m2.put(COL_4, "Sirius");
-            m2.put(COL_5, "7364577782");
-            m2.put(COL_6, "man2@hotels.com");
-            m2.put(COL_7, "lives at, broom street, newland");
-            m2.put(COL_8, "athere");
-            m2.put(COL_9, "there");
-            m2.put(COL_10, "23780");
+            m2.put(COL_1, "SammyJ");
+            m2.put(COL_2, "Password12$");
+            m2.put(COL_3, "Sam");
+            m2.put(COL_4, "Johnson");
+            m2.put(COL_5, "8177772000");
+            m2.put(COL_6, "sammyJ@mavs.uta.edu");
+            m2.put(COL_7, "1234, Anywhere Ln");
+            m2.put(COL_8, "Arlington");
+            m2.put(COL_9, "Tx");
+            m2.put(COL_10, "76019");
             m2.put(COL_11, "9090341279723884");
             m2.put(COL_12, "07/20/22");
             m2.put(COL_13, "m");
@@ -143,26 +162,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
             if(db.insertData(m5) == false)
             {}
         }
-        else //data
-        {
-            int flag=0;
-            while(cs.moveToNext())
-            {
-                if(cs.getString(1).equals("Tony") || cs.getString(1).equals("Evan"))
-                {
-                    flag=1;
-                }
-            }
-            if(flag==0)
-            {
-                db.deleteFrom();
-            }
-           /* For debugging
-           while(cs.moveToNext())
-            {
-                Log.i(cs.getString(0)+": ", cs.getString(1));
-            }*/
-        }db.close();
+        db.close();
 
         ///Default Permanent room values for database
         hdb = new hotelDatabase(this);
@@ -178,6 +178,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
                     {
                         ContentValues r = new ContentValues();
                         r.put("hotel_id", j);
+                        r.put("status", "available");
                         if (l < 10) {
                             r.put("room_no", k + "0" + l);
                         } else {
@@ -185,9 +186,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
                         }
                         if (k < 4) {
                             r.put("roomType", "Standard");
-                            r.put("status", "unavailable");
                         } else if (k == 4) {
-                            r.put("status", "available");
                             if (l <= 13) {
                                 r.put("roomType", "Standard");
                             } else {
@@ -216,6 +215,71 @@ public class MainAppScreenActivity extends AppCompatActivity {
             }
             */
         }
+
+        //Default hotel table
+        if(hdb.getHotel().getCount()==0)  //no data
+        {
+            hdb.deleteFrom();
+            int []mgrID={2,3,4,5,6};
+            String []hotel={"Maverick", "Ranger", "Williams", "Shard", "Liberty"};
+            for(int i=0;i<5;i++)
+            {
+                ContentValues hot=new ContentValues();
+                hot.put("location","Arlington");
+                hot.put("manager",Integer.toString(mgrID[i]));
+                hot.put("hotel",hotel[i]);
+
+                //Log.i("AAAAAAA: ",Integer.toString(mgrID[i])+"  "+hotel[i]);
+                if (hdb.insertHotel(hot) == false) {
+                    Toast.makeText(this, "Error in rooms occurred", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Log.i("NOTIF: ", "Success!");
+                }
+            }
+
+            //refresh
+            finish();
+            startActivity(getIntent());
+        }
+
+        //Default prices weekday & weekend
+        hotelDatabase hbd=new hotelDatabase(this);
+        if(hdb.getPrice("", "").getCount()==0)
+        {
+            //standard
+            ContentValues cov=new ContentValues();
+            cov.put("roomType", "standard");
+            cov.put("dayType", "weekday");
+            cov.put("cpn", "100");
+            hdb.insertPrice(cov);
+            cov.put("roomType", "standard");
+            cov.put("dayType", "weekend");
+            cov.put("cpn", "150");
+            hdb.insertPrice(cov);
+
+            //deluxe
+            cov.put("roomType", "deluxe");
+            cov.put("dayType", "weekday");
+            cov.put("cpn", "135");
+            hdb.insertPrice(cov);
+            cov.put("roomType", "deluxe");
+            cov.put("dayType", "weekend");
+            cov.put("cpn", "185");
+            hdb.insertPrice(cov);
+
+            //suite
+            cov.put("roomType", "suite");
+            cov.put("dayType", "weekday");
+            cov.put("cpn", "225");
+            hdb.insertPrice(cov);
+            cov.put("roomType", "suite");
+            cov.put("dayType", "weekend");
+            cov.put("cpn", "275");
+            hdb.insertPrice(cov);
+        }
+
         hdb.close();
     }
 

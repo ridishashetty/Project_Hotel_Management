@@ -139,7 +139,7 @@
             android:layout_marginLeft="12pt"
             android:id="@+id/RGRooms">
 
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 room"
@@ -148,7 +148,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="25dp" />
 
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2 rooms"
@@ -157,7 +157,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"/>
 
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3 rooms"
@@ -166,7 +166,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="25dp" />
 
-            <CheckBox
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4 rooms"

@@ -28,9 +28,11 @@ public class hotelDatabase extends SQLiteOpenHelper {
         String tbl_hotel = "CREATE TABLE "+TABLE_HOTEL+"(ID integer primary key autoincrement, manager_id INTEGER, " +
                 "name VARCHAR(20), location VARCHAR(50), CONSTRAINT a FOREIGN KEY(manager_id) REFERENCES testtable(ID))";
         String tbl_res = "CREATE TABLE "+TABLE_RESERVATION+"(ID integer primary key, user_id integer," +
-                " fromDate DATE, toDate DATE, room_id INTEGER, CONSTRAINT u FOREIGN KEY (user_id) REFERENCES testtable(ID)," +
-                " CONSTRAINT r FOREIGN KEY (room_id) REFERENCES roomTable(ID))";
+                " fromDate DATE, toDate DATE, hotel_id integer, room_num integer, status VARCHAR(20), CONSTRAINT u FOREIGN KEY (user_id) REFERENCES testtable(ID)," +
+                " CONSTRAINT r FOREIGN KEY (room_num) REFERENCES roomTable(room_no))";
+        String tbl_prices = "CREATE TABLE price(ID integer primary key autoincrement, roomType VARCHAR(20), dayType VARCHAR(20), costPerNight INTEGER)";
         //create tables
+        db.execSQL(tbl_prices);
         db.execSQL(tbl_room);
         db.execSQL(tbl_hotel);
         db.execSQL(tbl_res);
@@ -70,15 +72,15 @@ public class hotelDatabase extends SQLiteOpenHelper {
     }
 
     //insert to table 'hotel'
-    public boolean insertHotel (int mgr_id, String hotel_name, String location)
+    public boolean insertHotel (ContentValues cv)
     {
         SQLiteDatabase sqldb = this.getWritableDatabase();
 
         //Create content values
         ContentValues cv2 = new ContentValues();
-        cv2.put("manager_id", mgr_id);
-        cv2.put("name", hotel_name);
-        cv2.put("location", location);
+        cv2.put("manager_id", cv.getAsString("manager"));
+        cv2.put("name", cv.getAsString("hotel"));
+        cv2.put("location", cv.getAsString("location"));
 
         long res = sqldb.insert(TABLE_HOTEL, null, cv2);
         if(res == -1)
@@ -113,6 +115,27 @@ public class hotelDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public boolean insertPrice(ContentValues cv)
+    {
+        SQLiteDatabase sqldb = this.getWritableDatabase();
+
+        //Create content values
+        ContentValues cv2 = new ContentValues();
+        cv2.put("roomType", cv.getAsString("roomType"));
+        cv2.put("dayType", cv.getAsString("dayType"));
+        cv2.put("costPerNight", cv.getAsString("cpn"));
+
+        long res = sqldb.insert("price", null, cv2);
+        if(res == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //get values from table "room"
     public Cursor getRoom()
     {
@@ -122,6 +145,15 @@ public class hotelDatabase extends SQLiteOpenHelper {
 
         return cursor;
     }
+    public int getRoomCount(String roomT, int hotelID)
+    {
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        ///Perform RawQuery
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_ROOM+" WHERE status='available' AND roomType='"+roomT+"' AND hotel_id='"+hotelID+"'", null);
+
+        return cursor.getCount();
+    }
+
     public Cursor getRoomById(String id)
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
@@ -137,6 +169,18 @@ public class hotelDatabase extends SQLiteOpenHelper {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
         Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_HOTEL, null);
+
+        return cursor;
+    }
+    public Cursor getPrice(String roomType, String dayType)
+    {
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        ///Perform RawQuery
+        Cursor cursor=sqldb.rawQuery("SELECT * FROM price", null);;
+        if(!roomType.equals("")&&!dayType.equals(""))
+        {
+            cursor = sqldb.rawQuery("SELECT * FROM price WHERE roomType='"+roomType+"' AND dayType='"+dayType+"'", null);
+        }
 
         return cursor;
     }
@@ -157,6 +201,7 @@ public class hotelDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_ROOM);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_HOTEL);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_RESERVATION);
+        db.execSQL("DROP TABLE IF EXISTS price");
         onCreate(db);
     }
 

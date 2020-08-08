@@ -30,7 +30,7 @@ public class ReservationSummary extends AppCompatActivity {
         //What's the user id?
         Intent getI = getIntent();
         final String info = getI.getStringExtra("user_id");
-        Toast.makeText(ReservationSummary.this, "user id: "+info, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ReservationSummary.this, "user id: "+info, Toast.LENGTH_SHORT).show();
 
         //Logout
         final Button button= findViewById(R.id.logout);

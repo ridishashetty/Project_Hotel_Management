@@ -20,7 +20,7 @@ public class GuestScreen extends AppCompatActivity implements AdapterView.OnItem
         //What's the user id?
         Intent i = getIntent();
         final String info = i.getStringExtra("user_id");
-        Toast.makeText(GuestScreen.this, "user id: "+info, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(GuestScreen.this, "user id: "+info, Toast.LENGTH_SHORT).show();
 
         //Logout
         final Button button= findViewById(R.id.logout);
