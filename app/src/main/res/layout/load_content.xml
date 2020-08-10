@@ -18,13 +18,26 @@
             android:text="Logout"
             android:layout_gravity="end"
             android:textColor="@color/white" />
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:id="@+id/picture"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="2in">
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:id="@+id/picture"
+                android:layout_width="match_parent"
+                android:layout_height="2in">
 
-        </ImageView>
+            </ImageView>
+            <Button
+                android:id="@+id/confirm"
+                android:background="#2C1EC6"
+                android:textColor="@color/white"
+                android:layout_width="1.7in"
+                android:layout_height="0.35in"
+                android:textSize="20dp"
+                android:text="CONFIRM RESERVATION"
+                android:layout_gravity="center|bottom" />
+        </FrameLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +52,29 @@
                 android:id="@+id/tabLay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <!---->
+                <TableRow
+                    android:id="@+id/pop"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Credit card pin:"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        android:layout_weight="0.5">
+
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/pin"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.5"
+                        android:hint="Enter your card CVV to proceed with payment"
+                        android:textSize="22dp">
+
+                    </EditText>
+                </TableRow>
+                <!---->
                 <TableRow>
                     <TextView
                         android:id="@+id/th1"

@@ -167,7 +167,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
         ///Default Permanent room values for database
         hdb = new hotelDatabase(this);
         //hdb.deleteFrom();
-        Cursor cursor = hdb.getRoom();
+        Cursor cursor = hdb.getRoom("", "");
         if(cursor.getCount()==0)
         {
             for (int j = 1; j <= 5; j++)  //5 hotels
@@ -217,7 +217,7 @@ public class MainAppScreenActivity extends AppCompatActivity {
         }
 
         //Default hotel table
-        if(hdb.getHotel().getCount()==0)  //no data
+        if(hdb.getHotel("").getCount()==0)  //no data
         {
             hdb.deleteFrom();
             int []mgrID={2,3,4,5,6};

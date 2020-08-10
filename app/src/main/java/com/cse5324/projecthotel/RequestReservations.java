@@ -135,20 +135,6 @@ public class RequestReservations extends AppCompatActivity {
                 p.setMargins(10, 5, 5, 0);
                 miniTable.setLayoutParams(p);
 
-        /*        //Total Count
-                //Log.i("count", rt[i]+""+hid);
-                TableRow tr0 = new TableRow(this);
-                TextView th0 = new TextView(this);
-                th0.setTypeface(null, Typeface.BOLD);
-                th0.setText("***Total Available: ");
-                th0.setTextSize(12);
-                TextView td0 = new TextView(this);
-                td0.setText(Integer.toString(hdb.getRoomCount(rt[i],hid)));        //get hotel name from db
-                td0.setTextSize(12);
-                tr0.addView(th0);
-                tr0.addView(td0);
-                miniTable.addView(tr0);
-        */
                 //Hotel Name
                 TableRow tr1 = new TableRow(this);
                 TextView th1 = new TextView(this);
@@ -233,7 +219,9 @@ public class RequestReservations extends AppCompatActivity {
                 } //rt[i] itis
                 Cursor cost = hdb.getPrice(rt[i].toLowerCase(), itis);
                 cost.moveToFirst();
-                String amount=cost.getString(3);
+                Log.i("fr:::::", td5.getText().toString());
+                int calc=Integer.parseInt(cost.getString(3))*numOfroom;
+                final String amount=Integer.toString(calc);
 
                 TableRow tr6 = new TableRow(this);
                 TextView th6 = new TextView(this);
@@ -262,6 +250,8 @@ public class RequestReservations extends AppCompatActivity {
                         intent.putExtra("hotelID", d);
                         intent.putExtra("roomType", r);
                         intent.putExtra("numRoom", n);
+                        intent.putExtra("cost", amount);
+                        Log.i("request::::::::::::", amount);
                         //intent.putExtra("room_id", cursor.getString(0));
                         intent.putExtra("from", "request");
                         startActivity(intent);
