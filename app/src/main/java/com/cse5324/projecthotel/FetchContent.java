@@ -46,9 +46,9 @@ public class FetchContent extends AppCompatActivity {
         Intent i = getIntent();
         final String user_id = i.getStringExtra("user_id");
         final String user = i.getStringExtra("user_id");
-        int hid=i.getIntExtra("hotelID", 1);
+        final int hid=i.getIntExtra("hotelID", 1);
         String lastPage = i.getStringExtra("from");
-        Log.i("==============", user_id);
+        Log.i("==============", Integer.toString(hid));
 
         if(lastPage.equals("summary")) {
             hdb = new hotelDatabase(this);
@@ -117,6 +117,7 @@ public class FetchContent extends AppCompatActivity {
             }
 
             int id = getResources().getIdentifier(low+hid, "drawable", getPackageName());
+            Log.i("HEREEEE ", Integer.toString(hid));
             Drawable draw = getResources().getDrawable(id);
             findViewById(R.id.picture).setBackground(draw);
 
@@ -319,16 +320,7 @@ public class FetchContent extends AppCompatActivity {
                     cv.put("toDate", tod.getText().toString());
                     cv.put("amount", price.getText().toString());
                     cv.put("inTime", strTime.getText().toString());
-                    Cursor cs = hdb.getHotel(hotel.getText().toString());
-                    String hotID = "";
-                    if (cs.getCount() == 0) {
-                        Log.i("ERR:", "error");
-                    } else {
-                        cs.moveToFirst();
-                        hotID = cs.getString(0);
-                        //Log.i("ERR:", num);
-                    }
-                    cv.put("hotel_id", hotID);      ////////ID
+                    cv.put("hotel_id", hid);      ////////ID
                     cv.put("rType", rType.getText().toString());
                     cv.put("status", "pending");
                     cv.put("numRooms", nOfr.getText().toString());

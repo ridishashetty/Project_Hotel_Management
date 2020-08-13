@@ -92,7 +92,7 @@ public class ReservationSummary extends AppCompatActivity {
                 trMain.setWeightSum(1f);
 
                 String type=cur.getString(4); ////////
-                int hotel=cur.getInt(3);
+                final int hotel_id=cur.getInt(3);
            /* if(hotel==0)
             {
                 hotel=1;
@@ -102,7 +102,7 @@ public class ReservationSummary extends AppCompatActivity {
                 {
                     //Log.i("HHHHHHHHHHHHH  ", type.toLowerCase()+hotel);
                     //picture load
-                    int id = getResources().getIdentifier(type.toLowerCase()+hotel, "drawable", getPackageName());
+                    int id = getResources().getIdentifier(type.toLowerCase()+hotel_id, "drawable", getPackageName());
                     Drawable draw = getResources().getDrawable(id);
                     //ImageView pic = findViewById(R.id.roomPicture);
                     pic.setBackground(draw);
@@ -151,7 +151,7 @@ public class ReservationSummary extends AppCompatActivity {
                 miniTable.addView(tr1);
 
                 //Hotel Name
-                Cursor git=hdb.getHotel(Integer.toString(hotel));
+                Cursor git=hdb.getHotel(Integer.toString(hotel_id));
                 git.moveToNext();
                 TableRow tr2 = new TableRow(this);
                 TextView th2 = new TextView(this);
@@ -159,7 +159,7 @@ public class ReservationSummary extends AppCompatActivity {
                 th2.setText("Hotel Name: ");
                 th2.setTextSize(12);
                 TextView td2 = new TextView(this);
-                td2.setText(Integer.toString(hotel));        //get hotel name from db
+                td2.setText(git.getString(git.getColumnIndex("name")));        //get hotel name from db
                 td2.setTextSize(12);
                 tr2.addView(th2);
                 tr2.addView(td2);
@@ -206,6 +206,7 @@ public class ReservationSummary extends AppCompatActivity {
                         Intent intent = new Intent(ReservationSummary.this, FetchContent.class);
                         intent.putExtra("from", "summary");
                         intent.putExtra("user_id", user);
+                        intent.putExtra("hotelID", hotel_id);
                         intent.putExtra("reserveID", reserveID);
 
                         startActivity(intent);
