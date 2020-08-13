@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.PersistableBundle;
+import android.text.Editable;
 import android.text.Layout;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +50,7 @@ public class FetchContent extends AppCompatActivity {
         final String user = i.getStringExtra("user_id");
         final int hid=i.getIntExtra("hotelID", 1);
         String lastPage = i.getStringExtra("from");
-        Log.i("==============", Integer.toString(hid));
+        //Log.i("==============", Integer.toString(hid));
 
         if(lastPage.equals("summary")) {
             hdb = new hotelDatabase(this);
@@ -76,7 +78,7 @@ public class FetchContent extends AppCompatActivity {
             TextView nor=findViewById(R.id.td4);
             nor.setText(c.getString(2));
 
-            TextView in=findViewById(R.id.td5);
+            final TextView in=findViewById(R.id.td5);
             in.setText(c.getString(5));
 
             TextView out=findViewById(R.id.td6);
@@ -147,20 +149,6 @@ public class FetchContent extends AppCompatActivity {
                             trPop.setVisibility(View.VISIBLE);
                             trPop.setBackgroundColor(Color.CYAN);
                         }
-                        /*
-                        else if(btn.toLowerCase().contains("cancel"))
-                        {
-                            if(hdb.updateReservation(reserve,0,0, btn))
-                            {
-                                Log.i("OP: ", "Deletion success!"+u);
-                                Toast.makeText(FetchContent.this, "Reservation is cancelled", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
-                                intent.putExtra("user_id", u);
-                                startActivity(intent);
-                            }
-                        }
-
-                         */
                     }
                     else if(et.getText().toString().matches("\\d+"))    //go ahead
                     {
@@ -184,9 +172,9 @@ public class FetchContent extends AppCompatActivity {
                                 {
                                     //Log.i("WOOOFF: ", "That was a success! "+us);
                                     Toast.makeText(FetchContent.this, "Reservation is confirmed", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
-                                    intent.putExtra("user_id", us);
-                                    startActivity(intent);
+                                    //refresh
+                                    finish();
+                                    startActivity(getIntent());
                                 }
                                 else
                                 {
@@ -255,6 +243,72 @@ public class FetchContent extends AppCompatActivity {
                 }
             });
             hdb.close();
+
+            time.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Button bt=findViewById(R.id.modify);
+                    bt.setVisibility(View.VISIBLE);
+                }
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+            nor.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Button bt=findViewById(R.id.modify);
+                    bt.setVisibility(View.VISIBLE);
+                }
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+            in.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Button bt=findViewById(R.id.modify);
+                    bt.setVisibility(View.VISIBLE);
+                }
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+            out.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Button bt=findViewById(R.id.modify);
+                    bt.setVisibility(View.VISIBLE);
+                    EditText nor=findViewById(R.id.td4);
+                }
+                @Override
+                public void afterTextChanged(Editable s) {}
+            });
+
+            //Modify button
+            Button btn=findViewById(R.id.modify);
+            btn.setOnClickListener(new View.OnClickListener() {
+                EditText nor=findViewById(R.id.td4);
+                EditText intime=findViewById(R.id.td2);
+                @Override
+                public void onClick(View v) {
+                    hdb=new hotelDatabase(FetchContent.this);
+                    ContentValues cv=new ContentValues();
+                    cv.put("resId", reserve);
+                    cv.put("inTime", intime.getText().toString());
+                    cv.put("numOfRooms", nor.getText().toString());
+                    hdb.modifyReservation(cv);
+                    Toast.makeText(FetchContent.this, "Modification Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(FetchContent.this, ReservationSummary.class);
+                    intent.putExtra("user_id", user_id);
+                    startActivity(intent);
+                }
+            });
         }
         else if(lastPage.equals("request"))
         {
@@ -262,12 +316,12 @@ public class FetchContent extends AppCompatActivity {
             int numOfRoom=i.getIntExtra("numRoom", 1);
             String rt=i.getStringExtra("roomType");
             String price=i.getStringExtra("cost");
-            Log.i("fetch::::::::::::", price);
+            //Log.i("fetch::::::::::::", price);
             setContentView(R.layout.load_request_contents);
             //Cursor cursor = hdb.getRoomById(room_id);
             //Toast.makeText(FetchContent.this, cursor.getString(2), Toast.LENGTH_SHORT).show();
             TextView date = findViewById(R.id.td1);
-            TextView time = findViewById(R.id.td2);
+            EditText time = findViewById(R.id.td2);
 
             Calendar cal = Calendar.getInstance();
             Date today = cal.getTime();
@@ -303,7 +357,7 @@ public class FetchContent extends AppCompatActivity {
             //Request submit button
             final Button btn = findViewById(R.id.RequestReservation);
             btn.setOnClickListener(new View.OnClickListener() {
-                TextView strTime=findViewById(R.id.td2);
+                EditText strTime=findViewById(R.id.td2);
                 TextView hotel=findViewById(R.id.td);
                 TextView rType=findViewById(R.id.td3);
                 TextView nOfr=findViewById(R.id.td4);
@@ -371,7 +425,11 @@ public class FetchContent extends AppCompatActivity {
 
         ////editable
         final TableLayout tbl = findViewById(R.id.tabLay);
+/*
+
+ */
     }
+
 
     //go back button to work
     @Override

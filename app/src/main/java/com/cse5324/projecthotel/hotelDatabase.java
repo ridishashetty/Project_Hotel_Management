@@ -118,6 +118,31 @@ public class hotelDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public boolean modifyReservation (ContentValues ip)
+    {
+        SQLiteDatabase sqldb = this.getWritableDatabase();
+
+        //Create content values
+        ContentValues cv3 = new ContentValues();
+        cv3.put("user_id", ip.getAsString("user_id"));
+        cv3.put("fromDate", ip.getAsString("fromDate"));
+        cv3.put("toDate", ip.getAsString("toDate"));
+        cv3.put("numOfRooms", ip.getAsString("numRooms"));
+        cv3.put("inTime", ip.getAsString("inTime"));
+        cv3.put("hotel_id", ip.getAsString("hotel_id"));
+        cv3.put("status", ip.getAsString("status"));
+        cv3.put("rType", ip.getAsString("rType"));
+        long res = sqldb.insert(TABLE_RESERVATION, null, cv3);
+        if(res == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public boolean updateReservation(int id, int amt, int pin, String btnClicked)
     {
         SQLiteDatabase sqldb = this.getWritableDatabase();
@@ -239,6 +264,7 @@ public class hotelDatabase extends SQLiteOpenHelper {
         Cursor cursor=sqldb.rawQuery("SELECT * FROM price", null);;
         if(!roomType.equals("")&&!dayType.equals(""))
         {
+            Log.i("wherrrrrrrrrrr: ", roomType+"---"+dayType);
             cursor = sqldb.rawQuery("SELECT * FROM price WHERE roomType='"+roomType+"' AND dayType='"+dayType+"'", null);
         }
 
@@ -246,20 +272,30 @@ public class hotelDatabase extends SQLiteOpenHelper {
     }
 
     //get values from table "reservation"
-    public Cursor getReservation(int user)
+    public Cursor getReservation(int user, String date, String time)
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
         Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"' ORDER BY fromDate", null);
+        if(date!=null && !date.equals(""))
+        {
+            //Log.i("where: ", date+"----"+time);
+            String []array=date.split("-");
+            //Log.i("where: ", "----"+array.length);
+            int n=Integer.parseInt(date.split("-")[1])-1;
+            array[1]=Integer.toString(n);
+            String dt=array[0]+"-"+array[1]+"-"+array[2];
+            cursor=sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"' AND fromDate>='"+dt+"' AND inTime>='"+time+"' ORDER BY fromDate", null);
+        }
 
         return cursor;
     }
 
-    public Cursor getConfirmedReservations(int user, String status)
+    public Cursor getReservationsByStatus(String user_id, String status)
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
-        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"' AND status='"+status+"'", null);
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user_id+"' AND status='"+status+"'", null);
 
         return cursor;
     }

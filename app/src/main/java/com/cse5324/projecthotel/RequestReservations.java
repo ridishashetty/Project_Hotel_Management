@@ -218,7 +218,7 @@ public class RequestReservations extends AppCompatActivity {
                 th5.setText("Number of Nights: ");
                 th5.setTextSize(12);
                 TextView td5 = new TextView(this);
-                td5.setText("1");        //get time from db
+                td5.setText("1");        //get stay from db
                 td5.setTextSize(12);
                 tr5.addView(th5);
                 tr5.addView(td5);

@@ -35,6 +35,16 @@
                 android:layout_gravity="center|bottom"
                 >
                 <Button
+                    android:visibility="gone"
+                    android:id="@+id/modify"
+                    android:background="#5672D4"
+                    android:textColor="@color/white"
+                    android:layout_width="1.7in"
+                    android:layout_height="25pt"
+                    android:textSize="20dp"
+                    android:text="MODIFY RESERVATION"
+                    android:layout_marginBottom="5dp"/>
+                <Button
                     android:id="@+id/cancel"
                     android:background="#5672D4"
                     android:textColor="@color/white"
@@ -101,12 +111,12 @@
                         android:layout_weight="0.5">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/td1"
                         android:layout_width="match_parent"
-                        android:text="2020-07-24"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:layout_weight="1.5"
+                        android:textSize="22dp">
 
                     </TextView>
                 </TableRow>
@@ -120,14 +130,15 @@
                         android:layout_weight="0.5">
 
                     </TextView>
-                    <TextView
+
+                    <EditText
                         android:id="@+id/td2"
                         android:layout_width="match_parent"
-                        android:text="12:00:00 noon"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:layout_weight="1.5"
+                        android:text="12:00"
+                        android:textSize="22dp">
 
-                    </TextView>
+                    </EditText>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -174,17 +185,16 @@
                         android:text="Number of Rooms:"
                         android:textSize="22dp"
                         android:textStyle="bold"
-                        android:layout_weight="0.5">
+                        android:layout_weight="0.5"/>
 
-                    </TextView>
-                    <TextView
-                        android:id="@+id/td4"
-                        android:layout_width="match_parent"
-                        android:text="1"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        <EditText
+                            android:id="@+id/td4"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1.5"
+                            android:text="1"
+                            android:textSize="22dp">
 
-                    </TextView>
+                        </EditText>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -196,14 +206,14 @@
                         android:layout_weight="0.5">
 
                     </TextView>
-                    <TextView
+
+                    <EditText
                         android:id="@+id/td5"
                         android:layout_width="match_parent"
-                        android:text="2020-07-25"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
+                        android:layout_weight="1.5"
+                        android:textSize="22dp">
 
-                    </TextView>
+                    </EditText>
                 </TableRow>
                 <TableRow>
                     <TextView
@@ -215,14 +225,12 @@
                         android:layout_weight="0.5">
 
                     </TextView>
-                    <TextView
+
+                    <EditText
                         android:id="@+id/td6"
                         android:layout_width="match_parent"
-                        android:text="2024-07-31"
-                        android:textSize="22dp"
-                        android:layout_weight="1.5">
-
-                    </TextView>
+                        android:layout_weight="1.5"
+                        android:textSize="22dp"></EditText>
                 </TableRow>
                 <TableRow>
                     <TextView

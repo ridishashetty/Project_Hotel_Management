@@ -84,13 +84,12 @@
 
                     </TextView>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/td2"
                         android:layout_width="match_parent"
                         android:layout_weight="1.5"
                         android:hint="24-hour format"
-                        android:text="12:00:00 noon"
-                        android:textSize="22dp"></TextView>
+                        android:textSize="22dp"></EditText>
                 </TableRow>
                 <TableRow>
                     <TextView

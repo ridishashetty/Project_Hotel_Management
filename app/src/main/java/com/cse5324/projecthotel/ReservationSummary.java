@@ -34,6 +34,7 @@ public class ReservationSummary extends AppCompatActivity {
         //What's the user id?
         Intent getI = getIntent();
         final String info = getI.getStringExtra("user_id");
+        final String from=getI.getStringExtra("from");
         //Toast.makeText(ReservationSummary.this, "user_id="+info, Toast.LENGTH_SHORT).show();
 
         //Logout
@@ -51,7 +52,9 @@ public class ReservationSummary extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Goes to Login page
-                startActivity(new Intent(ReservationSummary.this, ReservationSummaryFilter.class));
+                Intent intent=new Intent(ReservationSummary.this, ReservationSummaryFilter.class);
+                intent.putExtra("user_id", info);
+                startActivity(intent);
             }
         });
 
@@ -73,9 +76,16 @@ public class ReservationSummary extends AppCompatActivity {
         hdb = new hotelDatabase(this);
         if(info!=null)
         {
-            Cursor cur=hdb.getReservation(Integer.parseInt(info));
+            String date="";
+            String time="";
+            if(from!=null)
+            {
+                date=getI.getStringExtra("startDate");
+                time=getI.getStringExtra("startTime");
+            }
+            Cursor cur=hdb.getReservation(Integer.parseInt(info), date, time);
             int count=cur.getCount();
-
+            Log.i("where: ", Integer.toString(count));
             for(int i=0;i<count;i++)    //////////////////////////////////////////////////////////////////
             {
                 cur.moveToNext();
@@ -249,7 +259,9 @@ public class ReservationSummary extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReservationSummary.this, PendingReservations.class));
+                Intent it=new Intent(ReservationSummary.this, PendingReservations.class);
+                it.putExtra("user_id", info);
+                startActivity(it);
             }
         });
     }

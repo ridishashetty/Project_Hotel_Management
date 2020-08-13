@@ -2,10 +2,17 @@ package com.cse5324.projecthotel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ReservationSummaryFilter extends AppCompatActivity {
     @Override
@@ -14,9 +21,12 @@ public class ReservationSummaryFilter extends AppCompatActivity {
         setContentView(R.layout.reserve_summ_filter);
 
         //getSupportActionBar().setTitle(""); // for set actionbar title
+        Intent intent=getIntent();
+        final String info=intent.getStringExtra("user_id");
+        //Log.i("user??", info);
 
         //cross button
-        final Button end=findViewById(R.id.cross);
+        Button end=findViewById(R.id.end);
         end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,11 +67,36 @@ public class ReservationSummaryFilter extends AppCompatActivity {
         });
 
         //submit button
-        final Button submit=findViewById(R.id.load);
-        end.setOnClickListener(new View.OnClickListener() {
+        Button submit=findViewById(R.id.submit);
+        final String user=info;
+//        Log.i("user??", user);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatePicker date=findViewById(R.id.date);
+                int day=date.getDayOfMonth();
+                int month=date.getMonth();
+                int year=date.getYear();
+                //String chosenDate=month+1+"-"+day+"-"+year;
+                //Toast.makeText(RequestReservationFilter.this, chosenDate, Toast.LENGTH_SHORT).show();
+                Calendar cl= Calendar.getInstance();
+                cl.set(Calendar.DAY_OF_MONTH, day);
+                cl.set(Calendar.MONTH, month);
+                cl.set(Calendar.YEAR, year);
+                SimpleDateFormat sdf=new SimpleDateFormat("MM-dd-YYYY");
+                String chosenDate=sdf.format(cl.getTime());
 
+                TimePicker time= findViewById(R.id.time);
+                int hour=time.getCurrentHour();
+                int min=time.getCurrentMinute();
+                String chosenTime=hour+":"+min;
+
+                Intent i=new Intent(ReservationSummaryFilter.this, ReservationSummary.class);
+                i.putExtra("startDate", chosenDate);
+                i.putExtra("startTime", chosenTime);
+                i.putExtra("user_id", user);
+                i.putExtra("from", "filter");
+                startActivity(i);
             }
         });
     }
