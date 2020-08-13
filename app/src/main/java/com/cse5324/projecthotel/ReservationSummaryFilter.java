@@ -55,5 +55,14 @@ public class ReservationSummaryFilter extends AppCompatActivity {
                 }
             }
         });
+
+        //submit button
+        final Button submit=findViewById(R.id.load);
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

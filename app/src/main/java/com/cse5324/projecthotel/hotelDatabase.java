@@ -24,12 +24,11 @@ public class hotelDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Create tables
         String tbl_room = "CREATE TABLE "+TABLE_ROOM+"(ID INTEGER PRIMARY KEY, hotel_id INTEGER, room_no INTEGER, " +
-                "roomType VARCHAR(25), guest_id INTEGER, checkin DATE, checkout DATE, status VARCHAR(25), " +
-                "CONSTRAINT h FOREIGN KEY(hotel_id) REFERENCES hotel(ID), CONSTRAINT g FOREIGN KEY(guest_id) REFERENCES testable(ID))";
+                "roomType VARCHAR(25), guest_id INTEGER, checkin DATE, checkout DATE, status VARCHAR(25), reservation_id INTEGER)";
         String tbl_hotel = "CREATE TABLE "+TABLE_HOTEL+"(ID integer primary key autoincrement, manager_id INTEGER, " +
-                "name VARCHAR(20), location VARCHAR(50), CONSTRAINT a FOREIGN KEY(manager_id) REFERENCES testtable(ID))";
+                "name VARCHAR(20), location VARCHAR(50))";
         String tbl_res = "CREATE TABLE "+TABLE_RESERVATION+"(ID integer primary key, user_id integer, numOfRooms integer, hotel_id integer, " +
-                " rType VARCHAR(20), fromDate DATE, toDate DATE, inTime VARCHAR(20), amountPaid integer, status VARCHAR(20), cardPin integer, CONSTRAINT u FOREIGN KEY (user_id) REFERENCES testtable(ID))";
+                " rType VARCHAR(20), fromDate DATE, toDate DATE, inTime VARCHAR(20), amountPaid integer, status VARCHAR(20), cardPin integer)";
         String tbl_prices = "CREATE TABLE price(ID integer primary key autoincrement, roomType VARCHAR(20), dayType VARCHAR(20), costPerNight INTEGER)";
         //create tables
         db.execSQL(tbl_prices);
@@ -194,18 +193,21 @@ public class hotelDatabase extends SQLiteOpenHelper {
     }
     public int getRoomCount(String roomT, int hotelID)
     {
+        //Log.i("dbVal: ", roomT+" "+hotelID);
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
         Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_ROOM+" WHERE status='available' AND roomType='"+roomT+"' AND hotel_id='"+hotelID+"'", null);
+        cursor.moveToFirst();
 
+//        Log.i("dbVal: ", Integer.toString(cursor.getCount()));
         return cursor.getCount();
     }
 
-    public Cursor getRoomById(String id)
+    public Cursor getRoomById(int id)
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
-        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_ROOM+" WHERE status='available' AND id='"+id+"'", null);
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_ROOM+" WHERE id='"+id+"'", null);
 
         return cursor;
     }
@@ -248,7 +250,16 @@ public class hotelDatabase extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
-        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"'", null);
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"' ORDER BY fromDate", null);
+
+        return cursor;
+    }
+
+    public Cursor getConfirmedReservations(int user, String status)
+    {
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        ///Perform RawQuery
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE user_id='"+user+"' AND status='"+status+"'", null);
 
         return cursor;
     }
@@ -257,7 +268,7 @@ public class hotelDatabase extends SQLiteOpenHelper {
     {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         ///Perform RawQuery
-        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE ID='"+id+"'", null);
+        Cursor cursor = sqldb.rawQuery("SELECT * FROM "+TABLE_RESERVATION+" WHERE ID='"+id+"'  ORDER BY fromDate", null);
 
         return cursor;
     }
@@ -272,17 +283,65 @@ public class hotelDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean updateRoomStatus(String stat, String id)
+    public boolean updateRoom(int numOfRooms, int hotel_id, String rType, String stat, int user, String checkin, String checkout, int resId)
     {
         SQLiteDatabase sqldb = this.getWritableDatabase();
-        Cursor cursor = sqldb.rawQuery("UPDATE "+TABLE_ROOM+" SET status='"+stat+"' WHERE id='"+id+"'", null);
-        if(cursor.getCount()==0)
+        boolean ret=false;
+        if(numOfRooms!=0)
         {
-            return false;
+            for(int i=0;i<numOfRooms;i++)   //reserve these rooms
+            {
+                Cursor cursor = sqldb.rawQuery("SELECT ID FROM "+TABLE_ROOM+ " WHERE hotel_id='"+hotel_id+"' AND roomType='"+rType+"' AND status='available' LIMIT 1", null);
+                cursor.moveToFirst();
+                int id=cursor.getInt(0);
+                ContentValues cv=new ContentValues();
+                cv.put("status", stat);
+                cv.put("guest_id", user);
+                cv.put("checkin", checkin);
+                cv.put("checkout", checkout);
+                cv.put("reservation_id", resId);
+
+                int res=sqldb.update(TABLE_ROOM, cv, "ID="+id, null);
+                if(res==0)
+                {
+                    ret=false;
+                    Log.i("ROOM: ", "FAIL");
+                }
+                else
+                {
+                    ret=true;
+                    //Log.i("ROOM: ", "PASS");
+                }
+            }
         }
         else
         {
-            return true;
+            Log.i("NOW: ", "here!");
+            //delete reserved rooms
+            ContentValues cv=new ContentValues();
+            cv.putNull("guest_id");
+            cv.putNull("checkin");
+            cv.putNull("checkout");
+            cv.putNull("reservation_id");
+            cv.put("status", "available");
+            int res=sqldb.update(TABLE_ROOM, cv, "reservation_id="+resId, null);
+            if(res==0)
+            {
+                ret=false;
+                Log.i("ROOM: ", "FAIL");
+            }
+            else
+            {
+                ret=true;
+                //Log.i("ROOM: ", "PASS");
+            }
         }
+        return ret;
+    }
+
+    public void alterAdd(String tableName, String colName, String colType)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("ALTER TABLE "+tableName+" ADD COLUMN "+colName+" "+colType+"");
     }
 }

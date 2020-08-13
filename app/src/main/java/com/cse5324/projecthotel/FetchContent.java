@@ -103,8 +103,17 @@ public class FetchContent extends AppCompatActivity {
             if(amt.getCount()!=0)
             {
                 amt.moveToFirst();
-                int cal=amt.getInt(3)*Integer.parseInt(c.getString(2));
-                price.setText(amt.getInt(3)+" dollars");
+                if(c.getString(8)==null)
+                {
+                    int cal=amt.getInt(3)*Integer.parseInt(c.getString(2));
+                    //calculate per night
+                    price.setText(cal+" dollars"); //amt.getInt(3)
+                }
+                else
+                {
+                    int cal=c.getInt(8);
+                    price.setText(cal+" dollars"); //amt.getInt(3)
+                }
             }
 
             int id = getResources().getIdentifier(low+hid, "drawable", getPackageName());
@@ -112,15 +121,16 @@ public class FetchContent extends AppCompatActivity {
             findViewById(R.id.picture).setBackground(draw);
 
             final Button confirm= findViewById(R.id.confirm);
+            final Button cancel= findViewById(R.id.cancel);
             if(c.getString(c.getColumnIndex("status")).equals("confirmed"))
             {
-                confirm.setText("CANCEL RESERVATION");
-                confirm.setBackgroundColor(Color.GRAY);
+                confirm.setVisibility(View.GONE);
+                cancel.setVisibility(View.VISIBLE);
             }
             else
             {
-                confirm.setText("CONFIRM RESERVATION");
-                confirm.setBackgroundColor(Color.BLUE);
+                cancel.setVisibility(View.VISIBLE);
+                confirm.setVisibility(View.VISIBLE);
             }
 
             final int reserve=reserveID;
@@ -136,30 +146,51 @@ public class FetchContent extends AppCompatActivity {
                             trPop.setVisibility(View.VISIBLE);
                             trPop.setBackgroundColor(Color.CYAN);
                         }
+                        /*
                         else if(btn.toLowerCase().contains("cancel"))
                         {
                             if(hdb.updateReservation(reserve,0,0, btn))
                             {
-                                Log.i("OP: ", "Deletion success!"+user);
+                                Log.i("OP: ", "Deletion success!"+u);
                                 Toast.makeText(FetchContent.this, "Reservation is cancelled", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
-                                intent.putExtra("user_id", user);
+                                intent.putExtra("user_id", u);
                                 startActivity(intent);
                             }
                         }
+
+                         */
                     }
                     else if(et.getText().toString().matches("\\d+"))    //go ahead
                     {
+                        final String us=user_id;
                         if(et.getText().toString().length()==3) //valid
                         {
                             String amt=price.getText().toString().split(" dollar")[0];
                             if(hdb.updateReservation(reserve, Integer.parseInt(amt), Integer.parseInt(et.getText().toString()), btn))
                             {
-                                Log.i("OP: ", "Update success!"+user);
-                                Toast.makeText(FetchContent.this, "Reservation is confirmed", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
-                                intent.putExtra("user_id", user);
-                                startActivity(intent);
+                                //To update rooms as well
+                                Cursor upd=hdb.getReservationById(reserve);
+                                upd.moveToNext();
+                                //Log.i("numOfRoomsConfirmedRN", upd.getString(2));    4-type
+                                int roomsReserved=Integer.parseInt(upd.getString(2));
+                                int hotel_id=Integer.parseInt(upd.getString(3));
+                                String type=upd.getString(4);
+                                int user=Integer.parseInt(upd.getString(1));
+                                String checkin=upd.getString(5);
+                                String checkout=upd.getString(6);
+                                if(hdb.updateRoom(roomsReserved, hotel_id, type, "unavailable", user, checkin, checkout, reserve))
+                                {
+                                    //Log.i("WOOOFF: ", "That was a success! "+us);
+                                    Toast.makeText(FetchContent.this, "Reservation is confirmed", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
+                                    intent.putExtra("user_id", us);
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Log.i("WOOOFF: ", "Naaahh, try again!");
+                                }
                             }
                             else
                             {
@@ -174,6 +205,51 @@ public class FetchContent extends AppCompatActivity {
                     else
                     {
                         Toast.makeText(FetchContent.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String btn=cancel.getText().toString();
+                    Cursor a=hdb.getReservationById(reserve);
+                    a.moveToNext();
+                    if(a.getString(a.getColumnIndex("status")).equals("confirmed"))
+                    {
+                        Log.i("iiiiiiiiiiiiii: ", "step 1");   //come here
+                        if(hdb.updateReservation(reserve,0,0, btn))
+                        {
+                            Log.i("iiiiiiiiiiiiii: ", "step 2");
+                            //now remove rooms as well
+                            if(hdb.updateRoom(0, 0, null, null, 0, null, null, reserve))
+                            {
+                                Log.i("OP: ", "Deletion success 1!"+u);
+                                Toast.makeText(FetchContent.this, "Reservation is cancelled", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
+                                intent.putExtra("user_id", u);
+                                startActivity(intent);
+                            }
+                            else
+                            {
+                                Log.i("OP: ", "Didn't work");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(hdb.updateReservation(reserve,0,0, btn))
+                        {
+                            Log.i("OP: ", "Deletion success 2!"+u);
+                            Toast.makeText(FetchContent.this, "Reservation is cancelled", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(FetchContent.this, ReservationSummary.class);
+                            intent.putExtra("user_id", u);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Log.i("hmmmm: ", "why here");
+                        }
                     }
                 }
             });

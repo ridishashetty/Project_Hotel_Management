@@ -26,7 +26,8 @@ public class MainAppScreenActivity extends AppCompatActivity {
         ///Default values for testtable i.e. system users
         db = new DatabaseHelper(this);
         //db.deleteFrom();
-
+        hdb = new hotelDatabase(this);
+        //hdb.deleteFrom();           //run this once to update tables
         String COL_1 = "USERNAME";
         String COL_2 = "PASSWORD";
         String COL_3 = "FIRSTNAME";
@@ -165,7 +166,24 @@ public class MainAppScreenActivity extends AppCompatActivity {
         db.close();
 
         ///Default Permanent room values for database
-        hdb = new hotelDatabase(this);
+        //check if updated table exists
+      /*  Cursor find=hdb.getRoom("Standard", "1");
+        int flag=0;
+        for(int k=0;k<find.getColumnCount();k++)
+        {
+            //Log.i("found: ", "hereeee");
+            if(find.getColumnName(k).equals("reservation_id"))
+            {
+                flag=1;
+                //Log.i("found: ", "yesss");
+                break;
+            }
+        }
+        if(flag==0)
+        {
+            //Log.i("found: ", "noooooooooo");
+            hdb.alterAdd("room", "reservation_id", "VARCHAR(50)");
+        } */
         //hdb.deleteFrom();
         Cursor cursor = hdb.getRoom("", "");
         if(cursor.getCount()==0)

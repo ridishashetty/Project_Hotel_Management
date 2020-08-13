@@ -149,6 +149,7 @@
                         android:textSize="22dp"
                         android:layout_weight="1.5">
                     </TextView>
+
                 </TableRow>
                 <TableRow>
                     <TextView

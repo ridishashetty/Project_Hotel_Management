@@ -96,12 +96,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12pt"
             android:id="@+id/RGType">
-
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Deluxe"
-                android:id="@+id/type3"
+                android:text="Standard"
+                android:id="@+id/type1"
                 android:checked="true"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp" />
@@ -109,8 +108,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Standard"
-                android:id="@+id/type4"
+                android:text="Deluxe"
+                android:id="@+id/type2"
                 android:checked="true"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp" />
@@ -119,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Suite"
-                android:id="@+id/type5"
+                android:id="@+id/type3"
                 android:checked="true"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp" />
@@ -183,13 +182,14 @@
             android:text="Start Date"
             android:textAlignment="textStart"
             android:textSize="25dp"/>
+
         <DatePicker
             android:id="@+id/date"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
+
             android:layout_width="match_parent"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"/>
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
         <Button
             android:id="@+id/startTime"
             android:layout_width="match_parent"

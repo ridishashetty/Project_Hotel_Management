@@ -21,8 +21,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class RequestReservations extends AppCompatActivity {
     hotelDatabase hdb;
@@ -37,8 +39,44 @@ public class RequestReservations extends AppCompatActivity {
         //What's the user id?
         Intent getI = getIntent();
         final String info = getI.getStringExtra("user_id");
-        //Toast.makeText(RequestReservations.this, "user id: " + info, Toast.LENGTH_SHORT).show();
+        String last=getI.getStringExtra("from");
 
+        int hid=1; //hotel id
+        List<String> rt=new ArrayList<String>(); // room type
+        String hotel="Maverick";
+        int numOfroom=1;
+        String strDate="";
+        String strTime="";
+        if(last==null)
+        {
+            String []array={"Standard", "Deluxe", "Suite"};
+            for(int i=0;i<array.length;i++)
+            {
+                Log.i("valssss ", array[i]);
+                rt.add(array[i]);
+            }
+            //Log.i("whats this now ", rt.toString());
+        }
+        else if(last.equals("filter"))
+        {
+            strDate=getI.getStringExtra("chosenDate");
+            strTime=getI.getStringExtra("chosenTime");
+            hotel=getI.getStringExtra("hotel_name");
+            hid=getI.getIntExtra("hotel_id", 0);
+            numOfroom=getI.getIntExtra("nOfRoom", 0);
+            String types=getI.getStringExtra("roomType");
+            String newtype=types.replace("[","");
+            newtype=newtype.replace("]","");
+            String []array=newtype.split(", ");
+            //Log.i("whats this ", Integer.toString(rt.size()));
+            for(int i=0;i<array.length;i++)
+            {
+                Log.i("valssss ", array[i]);
+                rt.add(array[i]);
+            }
+
+            //Log.i("whats this now ", rt.toString());
+        }
         //Logout
         final Button button = findViewById(R.id.logout);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,29 +114,12 @@ public class RequestReservations extends AppCompatActivity {
 
         hdb = new hotelDatabase(this);
 
-    /*
-                final int cs = cursor.getInt(0);
-                trMain.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        final Intent intent = new Intent(RequestReservations.this, FetchContent.class);
-                        intent.putExtra("row_num", Integer.toString(cs));
-                        intent.putExtra("user_id", info);
-                        //intent.putExtra("room_id", cursor.getString(0));
-                        intent.putExtra("from", "request");
-                        startActivity(intent);
-                    }
-                });
-
-    } */
-        final int hid = 1; //hotel id
-        String[] rt = {"Standard", "Deluxe", "Suite"}; // room type
-        int numOfroom=1;
-        for (int i = 0; i < 3; i++) //3 type's of room
+        for (int i = 0; i < rt.size(); i++) //selected type's of room
         {
-            Log.i("ALL: ", "hid="+hid+", rt="+rt[i]+", numOfroom="+numOfroom);
-            if(hdb.getRoomCount(rt[i],hid)>numOfroom)
+            //int it=hdb.getRoomCount(rt.get(i), hid);
+            //Log.i("ALL: ", Integer.toString(it));
+            if(hdb.getRoomCount(rt.get(i), hid)!=0)
             {
-                //Log.i("here: ",Integer.toString(count));
                 TableRow trMain = new TableRow(this);
                 trMain.setId(R.id.reqRow + i);
                 trMain.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -111,7 +132,7 @@ public class RequestReservations extends AppCompatActivity {
                 trMain.setWeightSum(1f);
 
                 //picture load
-                final int id = getResources().getIdentifier(rt[i].toLowerCase() + hid, "drawable", getPackageName());
+                final int id = getResources().getIdentifier(rt.get(i).toLowerCase() + hid, "drawable", getPackageName());
                 //Log.i("here: ", rt[i].toLowerCase() + "" + hid);
                 Drawable draw = getResources().getDrawable(id);
                 //ImageView pic = findViewById(R.id.roomPicture);
@@ -142,7 +163,7 @@ public class RequestReservations extends AppCompatActivity {
                 th1.setText("Hotel Name: ");
                 th1.setTextSize(12);
                 TextView td1 = new TextView(this);
-                td1.setText(Integer.toString(hid));        //get hotel name from db
+                td1.setText(hotel);        //get hotel name from db
                 td1.setTextSize(12);
                 tr1.addView(th1);
                 tr1.addView(td1);
@@ -168,7 +189,7 @@ public class RequestReservations extends AppCompatActivity {
                 th3.setText("Room Type: ");
                 th3.setTextSize(12);
                 TextView td3 = new TextView(this);
-                td3.setText(rt[i]);        //get bed from db
+                td3.setText(rt.get(i));        //get bed from db
                 td3.setTextSize(12);
                 tr3.addView(th3);
                 tr3.addView(td3);
@@ -217,7 +238,7 @@ public class RequestReservations extends AppCompatActivity {
                         itis="weekday";
                         break;
                 } //rt[i] itis
-                Cursor cost = hdb.getPrice(rt[i].toLowerCase(), itis);
+                Cursor cost = hdb.getPrice(rt.get(i).toLowerCase(), itis);
                 cost.moveToFirst();
                 Log.i("fr:::::", td5.getText().toString());
                 int calc=Integer.parseInt(cost.getString(3))*numOfroom;
@@ -240,7 +261,7 @@ public class RequestReservations extends AppCompatActivity {
                 trMain.addView(miniTable);
 
                 final int d=hid;
-                final String r=rt[i];
+                final String r=rt.get(i);
                 final int n=numOfroom;
                 trMain.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -257,6 +278,10 @@ public class RequestReservations extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+            else
+            {
+                Log.i("oooooooooooooo", " its here");
             }
         }
         ll.addView(table);

@@ -28,15 +28,31 @@
                 android:layout_height="2in">
 
             </ImageView>
-            <Button
-                android:id="@+id/confirm"
-                android:background="#2C1EC6"
-                android:textColor="@color/white"
-                android:layout_width="1.7in"
-                android:layout_height="0.35in"
-                android:textSize="20dp"
-                android:text="CONFIRM RESERVATION"
-                android:layout_gravity="center|bottom" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center|bottom"
+                >
+                <Button
+                    android:id="@+id/cancel"
+                    android:background="#5672D4"
+                    android:textColor="@color/white"
+                    android:layout_width="1.7in"
+                    android:layout_height="25pt"
+                    android:textSize="20dp"
+                    android:text="CANCEL RESERVATION"
+                    android:layout_marginBottom="5dp"/>
+                <Button
+                    android:id="@+id/confirm"
+                    android:background="#2C1EC6"
+                    android:textColor="@color/white"
+                    android:layout_width="1.7in"
+                    android:layout_height="25pt"
+                    android:textSize="20dp"
+                    android:text="CONFIRM RESERVATION"/>
+            </LinearLayout>
+
         </FrameLayout>
         <TextView
             android:layout_width="match_parent"
